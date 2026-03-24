@@ -1,0 +1,124 @@
+// Navigation
+.nav {
+    background: $white;
+    border-bottom: $border;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: $max-width;
+    margin: 0 auto;
+    display: flex;
+    padding: 0;
+}
+
+.nav-link {
+    font-family: $font-heading;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: $spacing-sm $spacing-md;
+    color: $text-color;
+    border-right: $border;
+    display: block;
+    transition: all 0.2s ease;
+    
+    &:hover {
+        background: $primary-color;
+        color: $white;
+        text-decoration: none;
+    }
+    
+    &.active {
+        background: $primary-color;
+        color: $white;
+    }
+    
+    &:last-child {
+        border-right: none;
+    }
+}
+
+// Category Badge
+.badge {
+    display: inline-block;
+    background: $primary-color;
+    color: $white;
+    padding: $spacing-xs $spacing-sm;
+    border: $border;
+    font-family: $font-heading;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+// Post Card
+.card {
+    background: $white;
+    border: $border;
+    box-shadow: $shadow-md;
+    padding: $spacing-md;
+    transition: all 0.2s ease;
+    
+    &:hover {
+        box-shadow: $shadow-lg;
+        transform: translate(-2px, -2px);
+    }
+    
+    &-title {
+        font-family: $font-heading;
+        font-size: 1.25rem;
+        margin-bottom: $spacing-sm;
+    }
+    
+    &-meta {
+        font-size: 0.875rem;
+        color: #666;
+        margin-bottom: $spacing-sm;
+    }
+    
+    &-excerpt {
+        font-size: 0.9375rem;
+        line-height: 1.6;
+    }
+}
+
+// Buttons
+.btn {
+    display: inline-block;
+    font-family: $font-heading;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: $spacing-sm $spacing-md;
+    border: $border;
+    background: $white;
+    color: $text-color;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+        background: $primary-color;
+        color: $white;
+        box-shadow: $shadow-sm;
+        text-decoration: none;
+    }
+    
+    &-primary {
+        background: $primary-color;
+        color: $white;
+        
+        &:hover {
+            background: darken($primary-color, 10%);
+        }
+    }
+    
+    &-accent {
+        background: $accent-color;
+        color: $white;
+        
+        &:hover {
+            background: darken($accent-color, 10%);
+        }
+    }
+}
