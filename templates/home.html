@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="home-grid">
+    {% set hero_post = get_section(path="posts/_index.md") %}
+    {% if hero_post.pages %}
+    {% set latest = hero_post.pages | first %}
+    <article class="hero-post">
+        <div class="card">
+            {% if latest.extra.image %}
+            <img src="{{ latest.extra.image }}" alt="{{ latest.title }}" class="card-image">
+            {% else %}
+            <div class="card-image" style="background: linear-gradient(135deg, #2563eb 0%, #ff6b35 100%);"></div>
+            {% endif %}
+            <div class="card-content">
+                {% if latest.taxonomies.categories %}
+                <span class="badge">{{ latest.taxonomies.categories[0] }}</span>
+                {% endif %}
+                <h2 class="card-title"><a href="{{ latest.permalink }}">{{ latest.title }}</a></h2>
+                <p class="card-meta">{{ latest.date | date(format="%B %d, %Y") }}</p>
+                <p class="card-excerpt">{{ latest.description }}</p>
+                <a href="{{ latest.permalink }}" class="btn btn-primary">Read More</a>
+            </div>
+        </div>
+    </article>
+    {% endif %}
+    
+    <aside class="sidebar-posts">
+        {% for page in hero_post.pages | slice(start=1, end=5) %}
+        <article class="card">
+            {% if page.taxonomies.categories %}
+            <span class="badge">{{ page.taxonomies.categories[0] }}</span>
+            {% endif %}
+            <h3 class="card-title"><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
+            <p class="card-meta">{{ page.date | date(format="%B %d, %Y") }}</p>
+        </article>
+        {% endfor %}
+    </aside>
+</div>
+{% endblock %}
