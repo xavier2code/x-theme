@@ -1,1 +1,8 @@
 .worktrees/
+
+# Theme only - exclude sample content and docs
+content/
+docs/
+
+# Development files
+AGENTS.md
