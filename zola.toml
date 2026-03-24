@@ -3,19 +3,9 @@ title = "My Blog"
 compile_sass = true
 build_search_index = false
 
-[markdown]
-insert_anchor_links = true
-highlight_code = false
-
-[markdown.highlighting]
-theme = "catppuccin-mocha"
+taxonomies = [
+    { name = "categories", feed = true },
+    { name = "tags", feed = true }
+]
 
 [extra]
-# Theme colors
-bg_color = "#f5f0e6"
-primary_color = "#2563eb"
-accent_color = "#ff6b35"
-text_color = "#000000"
-
-[taxonomies]
-category = "categories"
