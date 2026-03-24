@@ -12,6 +12,51 @@
     margin: 0 auto;
     display: flex;
     padding: 0;
+    position: relative;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 50px;
+    height: 50px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    
+    span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background: $text-color;
+        transition: all 0.3s ease;
+    }
+    
+    &:hover span {
+        background: $primary-color;
+    }
+}
+
+.nav-links {
+    display: flex;
+    
+    @media (max-width: 768px) {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: $white;
+        border-bottom: $border;
+        display: none;
+        
+        &.open {
+            display: flex;
+        }
+    }
 }
 
 .nav-link {
@@ -38,6 +83,27 @@
     &:last-child {
         border-right: none;
     }
+    
+    @media (max-width: 768px) {
+        border-right: none;
+        border-bottom: $border;
+        
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+.nav-toggle.open {
+    span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    span:nth-child(2) {
+        opacity: 0;
+    }
+    span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
 }
 
 // Category Badge
@@ -63,7 +129,8 @@
     
     &:hover {
         box-shadow: $shadow-lg;
-        transform: translate(-2px, -2px);
+        transform: translate(-4px, -4px);
+        z-index: 10;
     }
     
     &-title {
@@ -119,6 +186,47 @@
         
         &:hover {
             background: darken($accent-color, 10%);
+        }
+    }
+}
+
+// Footer
+.footer {
+    border-top: $border;
+    padding: $spacing-lg $spacing-md;
+}
+
+.footer-content {
+    max-width: $max-width;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+    
+    p {
+        margin: 0;
+    }
+}
+
+.social-links {
+    display: flex;
+    gap: $spacing-md;
+    
+    a {
+        color: $text-color;
+        font-family: $font-heading;
+        font-weight: 700;
+        font-size: 0.875rem;
+        padding: $spacing-xs $spacing-sm;
+        border: $border;
+        transition: all 0.2s ease;
+        
+        &:hover {
+            background: $primary-color;
+            color: $white;
+            text-decoration: none;
         }
     }
 }
