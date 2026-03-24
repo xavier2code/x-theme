@@ -1,6 +1,9 @@
 # x-theme
 
-A Zola static site generator theme inspired by 90s print magazines.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Zola](https://img.shields.io/badge/Zola-0.22+-orange.svg)](https://www.getzola.org/)
+
+A Zola static site generator theme inspired by 90s print magazines with bold typography, hard shadows, and nostalgic scrolling marquees.
 
 ## Installation
 
