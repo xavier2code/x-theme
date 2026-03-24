@@ -1,3 +1,7 @@
+// Animation Variables
+$ease-linear: linear;
+$duration-marquee: 30s;
+
 .marquee {
     background: $text-color;
     color: $bg-color;
@@ -5,12 +9,14 @@
     border-bottom: $border;
     overflow: hidden;
     padding: $spacing-sm 0;
+    will-change: contents;
 }
 
 .marquee-content {
     display: flex;
     width: fit-content;
-    animation: marquee 20s linear infinite;
+    animation: marquee $duration-marquee $ease-linear infinite;
+    will-change: transform;
 }
 
 .marquee span {
@@ -28,5 +34,16 @@
     }
     100% {
         transform: translateX(-50%);
+    }
+}
+
+// Respect reduced motion preference
+@media (prefers-reduced-motion: reduce) {
+    .marquee-content {
+        animation: none;
+    }
+    
+    .marquee span:last-child {
+        display: none;
     }
 }

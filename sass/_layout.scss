@@ -1,3 +1,9 @@
+// Animation Variables
+$ease-smooth: cubic-bezier(0.4, 0.0, 0.2, 1);
+$ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+$duration-normal: 250ms;
+$duration-slow: 400ms;
+
 // Homepage Grid
 .home-grid {
     display: grid;
@@ -17,10 +23,12 @@
     
     .card {
         height: 100%;
-        transform: translate(0, 0);
+        transition: box-shadow $duration-normal $ease-smooth,
+                    transform $duration-normal $ease-bounce;
+        will-change: box-shadow, transform;
         
         &:hover {
-            transform: translate(-6px, -6px);
+            transform: translate(-8px, -8px);
         }
     }
     
@@ -52,6 +60,9 @@
     .card {
         box-shadow: $shadow-sm;
         position: relative;
+        transition: box-shadow $duration-normal $ease-smooth,
+                    transform $duration-normal $ease-bounce;
+        will-change: box-shadow, transform;
         
         &:nth-child(1) {
             transform: translate($spacing-md, $spacing-md);
