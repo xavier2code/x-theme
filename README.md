@@ -2,6 +2,30 @@
 
 A Zola static site generator theme inspired by 90s print magazines.
 
+## Installation
+
+### As Git Submodule (Recommended)
+
+```bash
+cd your-zola-site
+git submodule add https://github.com/xavier2code/x-theme.git themes/x-theme
+```
+
+### Clone Directly
+
+```bash
+cd your-zola-site/themes
+git clone https://github.com/xavier2code/x-theme.git
+```
+
+### Enable Theme
+
+Add to your `zola.toml`:
+
+```toml
+theme = "x-theme"
+```
+
 ## Quick Start
 
 ### Prerequisites
@@ -27,7 +51,6 @@ zola check
 ## Project Structure
 
 ```
-├── zola.toml              # Zola configuration
 ├── templates/            # Tera HTML templates
 │   ├── base.html          # Base template
 │   ├── home.html          # Homepage
@@ -40,19 +63,17 @@ zola check
 │   ├── _base.scss         # Reset, typography
 │   ├── _components.scss   # UI components
 │   └── ...
-└── content/              # Markdown content
-    ├── _index.md
-    ├── about.md
-    └── posts/
+└── zola.toml              # Theme configuration
 ```
 
 ## Configuration
 
-Edit `zola.toml`:
+Edit your site's `zola.toml`:
 
 ```toml
 base_url = "https://example.com"
 title = "My Blog"
+theme = "x-theme"
 compile_sass = true
 
 taxonomies = [
