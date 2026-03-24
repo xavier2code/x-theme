@@ -1,0 +1,32 @@
+.marquee {
+    background: $text-color;
+    color: $bg-color;
+    border-top: $border;
+    border-bottom: $border;
+    overflow: hidden;
+    padding: $spacing-sm 0;
+}
+
+.marquee-content {
+    display: flex;
+    width: fit-content;
+    animation: marquee 20s linear infinite;
+}
+
+.marquee span {
+    white-space: nowrap;
+    padding-right: 2rem;
+    font-family: $font-heading;
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 1px;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
