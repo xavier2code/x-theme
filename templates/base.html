@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ config.title }}{% endblock %}</title>
+    
+    <!-- Google Fonts: Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{ get_url(path="main.css") }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="{{ get_url(path="/") }}" class="nav-link {% if current_path == "/" %}active{% endif %}">HOME</a>
+            <a href="{{ get_url(path="@/_index.md") }}" class="nav-link {% if current_path == "/archive" %}active{% endif %}">ARCHIVE</a>
+            <a href="{{ get_url(path="about") }}" class="nav-link {% if current_path == "/about" %}active{% endif %}">ABOUT</a>
+            <a href="{{ get_url(path="contact") }}" class="nav-link {% if current_path == "/contact" %}active{% endif %}">CONTACT</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Marquee Ticker -->
+    <div class="marquee">
+        <div class="marquee-content">
+            <span>★ WELCOME TO MY BLOG ★ LATEST POSTS ★ 90S PRINT AESTHETIC ★ SCROLLING NEWS ★ DESIGN ★ ART ★ CREATIVITY ★ </span>
+            <span aria-hidden="true">★ WELCOME TO MY BLOG ★ LATEST POSTS ★ 90S PRINT AESTHETIC ★ SCROLLING NEWS ★ DESIGN ★ ART ★ CREATIVITY ★ </span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; {{ now() | date(format="%Y") }} {{ config.title }}. Built with Zola.</p>
+    </footer>
+</body>
+</html>
