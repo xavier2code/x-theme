@@ -1,0 +1,32 @@
+// Colors
+$bg-color: #f5f0e6;
+$primary-color: #2563eb;
+$accent-color: #ff6b35;
+$text-color: #000000;
+$white: #ffffff;
+$border-color: #000000;
+
+// Typography
+$font-heading: 'Playfair Display', Georgia, serif;
+$font-body: Georgia, serif;
+
+// Spacing
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+
+// Borders
+$border-width: 3px;
+$border: $border-width solid $border-color;
+
+// Shadows
+$shadow-sm: 4px 4px 0 $border-color;
+$shadow-md: 6px 6px 0 $border-color;
+$shadow-lg: 8px 8px 0 $border-color;
+
+// Layout
+$max-width: 1200px;
+$content-width: 65ch;
+$nav-height: 60px;
