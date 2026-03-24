@@ -1,0 +1,138 @@
+// Homepage Grid
+.home-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: $spacing-lg;
+    
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.hero-post {
+    grid-column: 1;
+    
+    .card {
+        height: 100%;
+    }
+    
+    .card-image {
+        width: 100%;
+        height: 300px;
+        background: #ddd;
+        border-bottom: $border;
+        margin-bottom: $spacing-md;
+        object-fit: cover;
+    }
+}
+
+.sidebar-posts {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    
+    @media (max-width: 768px) {
+        grid-column: 1;
+    }
+    
+    .card {
+        box-shadow: $shadow-sm;
+        
+        &:hover {
+            box-shadow: $shadow-md;
+        }
+    }
+}
+
+// Archive Grid
+.archive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: $spacing-lg;
+}
+
+// Single Post Layout
+.post-layout {
+    max-width: $content-width;
+    margin: 0 auto;
+    
+    .post-header {
+        margin-bottom: $spacing-xl;
+        
+        .badge {
+            margin-bottom: $spacing-sm;
+        }
+        
+        h1 {
+            margin-bottom: $spacing-sm;
+        }
+    }
+    
+    .post-meta {
+        font-size: 0.875rem;
+        color: #666;
+        padding-bottom: $spacing-md;
+        border-bottom: $border;
+    }
+    
+    .post-content {
+        font-size: 1.125rem;
+        line-height: 1.8;
+        
+        p {
+            margin-bottom: $spacing-md;
+        }
+        
+        h2, h3 {
+            margin-top: $spacing-xl;
+            margin-bottom: $spacing-md;
+        }
+        
+        blockquote {
+            border-left: 4px solid $primary-color;
+            padding-left: $spacing-md;
+            margin: $spacing-lg 0;
+            font-style: italic;
+        }
+        
+        code {
+            background: darken($bg-color, 5%);
+            padding: 2px 6px;
+            border: 1px solid #ddd;
+        }
+        
+        pre {
+            background: #1a1a1a;
+            color: #f8f8f2;
+            padding: $spacing-md;
+            overflow-x: auto;
+            border: $border;
+            margin: $spacing-lg 0;
+        }
+    }
+    
+    .highlight {
+        background: $accent-color;
+        color: $white;
+        padding: 2px 6px;
+    }
+}
+
+// Post Navigation
+.post-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: $spacing-xl;
+    padding-top: $spacing-lg;
+    border-top: $border;
+    
+    .prev, .next {
+        max-width: 45%;
+    }
+    
+    .next {
+        text-align: right;
+        margin-left: auto;
+    }
+}
