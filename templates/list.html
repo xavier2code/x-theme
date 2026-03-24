@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 style="margin-bottom: 2rem; border-bottom: 3px solid black; padding-bottom: 1rem;">
+    {% if term %}
+    Category: {{ term }}
+    {% else %}
+    All Posts
+    {% endif %}
+</h1>
+
+<div class="archive-grid">
+    {% for page in paginator.pages %}
+    <article class="card">
+        {% if page.taxonomies.categories %}
+        <span class="badge">{{ page.taxonomies.categories[0] }}</span>
+        {% endif %}
+        <h2 class="card-title"><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
+        <p class="card-meta">{{ page.date | date(format="%B %d, %Y") }}</p>
+        {% if page.description %}
+        <p class="card-excerpt">{{ page.description }}</p>
+        {% endif %}
+        <a href="{{ page.permalink }}" class="btn">Read More</a>
+    </article>
+    {% endfor %}
+</div>
+
+{% if paginator.previous or paginator.next %}
+<nav class="post-nav" style="margin-top: 3rem;">
+    {% if paginator.previous %}
+    <a href="{{ paginator.previous }}" class="btn">← Newer Posts</a>
+    {% endif %}
+    {% if paginator.next %}
+    <a href="{{ paginator.next }}" class="btn">Older Posts →</a>
+    {% endif %}
+</nav>
+{% endif %}
+{% endblock %}
