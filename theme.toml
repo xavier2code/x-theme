@@ -1,0 +1,5 @@
+name = "x-theme"
+description = "A 90s print aesthetic blog theme"
+license = "MIT"
+homepage = "https://github.com/xavier2code/x-theme"
+min_version = "0.22"
