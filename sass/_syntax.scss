@@ -1,0 +1,115 @@
+/* 90s Neon Print Syntax Highlighting */
+/* Overrides Zola's giallo.css with custom neon colors */
+
+@import url("/giallo.css");
+
+/* Base code styling */
+.z-code {
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+}
+
+/* Line highlighting */
+.z-hl {
+    background-color: #1a1a1a !important;
+}
+
+/* Line numbers */
+.giallo-ln {
+    color: #444;
+    user-select: none;
+}
+
+/* Comments - Gray italic */
+.z-comment { color: #666666; font-style: italic; }
+
+/* Keywords - Neon Orange (main accent) */
+.z-keyword,
+.z-storage {
+    color: #ff6b35;
+    font-weight: bold;
+}
+
+/* Strings - Electric Pink */
+.z-string,
+.z-source {
+    color: #ff6b9d;
+}
+
+/* Functions/Support - Cyan */
+.z-support,
+.z-entity.z-name.z-function,
+.z-meta.z-module-reference {
+    color: #00d4ff;
+}
+
+/* Types/Classes - Neon Green */
+.z-entity.z-name.z-tag,
+.z-storage.z-type {
+    color: #39ff14;
+    font-weight: bold;
+}
+
+/* Constants/Numbers - Bright Yellow */
+.z-constant,
+.z-support.z-constant {
+    color: #ffd93d;
+    font-weight: bold;
+}
+
+/* Variables - Off-white */
+.z-variable,
+.z-variable.z-other {
+    color: #f0f0f0;
+}
+
+/* Operators/Punctuation - White */
+.z-punctuation,
+.z-operator {
+    color: #ffffff;
+}
+
+/* HTML/XML Tags - Hot Pink */
+.z-meta.z-tag,
+.z-brackethighlighter.z-tag {
+    color: #ff69b4;
+}
+
+/* Markup/Headings - Cyan */
+.z-markup.z-heading {
+    color: #00d4ff;
+    font-weight: bold;
+}
+
+/* Quotes - Neon Green */
+.z-markup.z-quote {
+    color: #85e89d;
+}
+
+/* Deleted/Inserted - Red/Green */
+.z-markup.z-deleted {
+    color: #ff0000;
+    background-color: #86181d;
+}
+
+.z-markup.z-inserted {
+    color: #85e89d;
+    background-color: #144620;
+}
+
+/* Invalid/Broken - Bright Red */
+.z-invalid {
+    color: #ff0000;
+    font-style: italic;
+}
+
+/* Error message */
+.z-message.z-error {
+    color: #ff0000;
+}
+
+/* Regex */
+.z-string.z-regexp,
+.z-source.z-regexp {
+    color: #dbedff;
+}
