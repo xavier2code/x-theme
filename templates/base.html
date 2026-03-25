@@ -24,6 +24,8 @@
             <div class="nav-links">
                 <a href="{{ get_url(path="/") }}" class="nav-link {% if current_path == "/" %}active{% endif %}">HOME</a>
                 <a href="{{ get_url(path="archives") }}" class="nav-link {% if current_path == "/archives" %}active{% endif %}">ARCHIVE</a>
+                <a href="{{ get_url(path="tags") }}" class="nav-link {% if current_path is starting_with("/tags") %}active{% endif %}">TAGS</a>
+                <a href="{{ get_url(path="categories") }}" class="nav-link {% if current_path is starting_with("/categories") %}active{% endif %}">CATEGORIES</a>
                 <a href="{{ get_url(path="about") }}" class="nav-link {% if current_path == "/about" %}active{% endif %}">ABOUT</a>
                 <a href="{{ get_url(path="contact") }}" class="nav-link {% if current_path == "/contact" %}active{% endif %}">CONTACT</a>
             </div>
