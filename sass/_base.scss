@@ -29,6 +29,12 @@ h1 { font-size: 3rem; }
 h2 { font-size: 2.25rem; }
 h3 { font-size: 1.5rem; }
 
+@media (max-width: 768px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+    h3 { font-size: 1.25rem; }
+}
+
 p {
     margin-bottom: $spacing-sm;
 }
@@ -54,10 +60,4 @@ img {
     margin: 0 auto;
     padding: $spacing-lg $spacing-md;
     width: 100%;
-}
-
-.footer {
-    text-align: center;
-    padding: $spacing-md;
-    border-top: $border;
 }

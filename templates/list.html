@@ -4,7 +4,7 @@
 {% set lang = current_path | truncate(l=3, end="") | trim(start="/") %}
 {% if lang != "en" %}{% set_global lang = "zh" %}{% endif %}
 {% set i18n = load_data(path="themes/x-theme/i18n/" ~ lang ~ ".toml") %}
-<h1 style="margin-bottom: 2rem; border-bottom: 3px solid black; padding-bottom: 1rem;">
+<h1 class="section-header">
     {% if term %}
     Category: {{ term }}
     {% else %}
@@ -32,7 +32,7 @@
 </div>
 
 {% if paginator.previous or paginator.next %}
-<nav class="post-nav" style="margin-top: 3rem;">
+<nav class="post-nav pagination">
     {% if paginator.previous %}
     <a href="{{ paginator.previous }}" class="btn">← Newer Posts</a>
     {% endif %}
