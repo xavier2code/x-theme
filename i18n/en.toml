@@ -1,0 +1,12 @@
+[nav]
+home = "Home"
+archive = "Archive"
+tags = "Tags"
+categories = "Categories"
+about = "About"
+contact = "Contact"
+
+[common]
+read_more = "Read More"
+all_posts = "All Posts"
+posts = "posts"
