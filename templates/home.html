@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% set lang = current_path | truncate(l=3, end="") | trim(start="/") %}
+{% if lang != "en" %}{% set_global lang = "zh" %}{% endif %}
+{% set i18n = load_data(path="themes/x-theme/i18n/" ~ lang ~ ".toml") %}
 <div class="home-grid">
     {% set hero_post = get_section(path="posts/_index.md") %}
     {% if hero_post.pages %}
@@ -19,7 +22,7 @@
                 <h2 class="card-title"><a href="{{ latest.permalink }}">{{ latest.title }}</a></h2>
                 <p class="card-meta">{{ latest.date | date(format="%B %d, %Y") }}</p>
                 <p class="card-excerpt">{{ latest.description }}</p>
-                <a href="{{ latest.permalink }}" class="btn btn-primary">Read More</a>
+                <a href="{{ latest.permalink }}" class="btn btn-primary">{{ i18n.common.read_more }}</a>
             </div>
         </div>
     </article>
