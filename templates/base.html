@@ -35,9 +35,9 @@
             </div>
             <div class="lang-switcher">
                 {% if current_path is starting_with("/en") %}
-                <a href="{{ get_url(path=current_path, lang="zh") }}" class="lang-btn">中文</a>
+                <a href="{{ current_path | replace(from="/en", to="") }}" class="lang-btn">中文</a>
                 {% else %}
-                <a href="{{ get_url(path=current_path, lang="en") }}" class="lang-btn">EN</a>
+                <a href="/en{{ current_path }}" class="lang-btn">EN</a>
                 {% endif %}
             </div>
         </div>
