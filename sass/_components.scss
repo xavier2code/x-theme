@@ -143,6 +143,20 @@ $duration-slow: 400ms;
     text-transform: uppercase;
 }
 
+// Tag
+.tag {
+    display: inline-block;
+    background: $accent-color;
+    color: $white;
+    padding: 2px 8px;
+    border: 2px solid $border-color;
+    font-family: $font-heading;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: 2px 2px 0 $border-color;
+}
+
 // Post Card
 .card {
     background: $white;
@@ -262,6 +276,32 @@ $duration-slow: 400ms;
             color: $white;
             text-decoration: none;
             transform: translateY(-2px);
+        }
+    }
+}
+
+.lang-switcher {
+    display: flex;
+    gap: $spacing-xs;
+    
+    .lang-btn {
+        font-family: $font-heading;
+        font-weight: 700;
+        font-size: 0.75rem;
+        padding: 4px 8px;
+        border: 2px solid $border-color;
+        background: $white;
+        cursor: pointer;
+        text-transform: uppercase;
+        
+        &:hover {
+            background: $accent-color;
+            color: $white;
+        }
+        
+        &.active {
+            background: $accent-color;
+            color: $white;
         }
     }
 }
