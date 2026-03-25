@@ -4,11 +4,11 @@
 <div class="home-grid">
     {% set hero_post = get_section(path="posts/_index.md") %}
     {% if hero_post.pages %}
-    {% set latest = hero_post.pages | first %}
+    {% set latest = get_page(path="posts/article_20260325.md") %}
     <article class="hero-post">
         <div class="card">
-            {% if latest.extra.image %}
-            <img src="{{ latest.extra.image }}" alt="{{ latest.title }}" class="card-image">
+            {% if latest.extra.cover %}
+            <img src="{{ get_url(path=latest.extra.cover) }}" alt="{{ latest.title }}" class="card-image">
             {% else %}
             <div class="card-image" style="background: linear-gradient(135deg, #2563eb 0%, #ff6b35 100%);"></div>
             {% endif %}

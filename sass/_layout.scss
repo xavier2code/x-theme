@@ -128,6 +128,15 @@
     padding: $spacing-sm 0;
     border-bottom: 1px dashed rgba($border-color, 0.3);
 
+    .timeline-cover {
+        width: 80px;
+        height: 60px;
+        object-fit: cover;
+        border: 2px solid $border-color;
+        box-shadow: $shadow-sm;
+        flex-shrink: 0;
+    }
+
     .timeline-date {
         font-family: $font-heading;
         font-weight: 700;
@@ -163,6 +172,15 @@
     .post-header {
         margin-bottom: $spacing-xl;
         position: relative;
+        
+        .post-cover {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border: $border;
+            box-shadow: $shadow-md;
+            margin-bottom: $spacing-lg;
+        }
         
         .badge {
             margin-bottom: $spacing-sm;
