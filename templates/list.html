@@ -1,26 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% set lang = current_path | truncate(l=3, end="") | trim(start="/") %}
+{% if lang != "en" %}{% set_global lang = "zh" %}{% endif %}
+{% set i18n = load_data(path="themes/x-theme/i18n/" ~ lang ~ ".toml") %}
 <h1 style="margin-bottom: 2rem; border-bottom: 3px solid black; padding-bottom: 1rem;">
     {% if term %}
     Category: {{ term }}
     {% else %}
-    All Posts
+    {{ i18n.common.all_posts }}
     {% endif %}
 </h1>
 
-<div class="archive-grid">
+{% if term %}
+<div class="archive-timeline">
     {% for page in paginator.pages %}
-    <article class="card">
-        {% if page.taxonomies.categories %}
-        <span class="badge">{{ page.taxonomies.categories[0] }}</span>
-        {% endif %}
-        <h2 class="card-title"><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
-        <p class="card-meta">{{ page.date | date(format="%B %d, %Y") }}</p>
-        {% if page.description %}
-        <p class="card-excerpt">{{ page.description }}</p>
-        {% endif %}
-        <a href="{{ page.permalink }}" class="btn">Read More</a>
+    <article class="timeline-item">
+        <div class="timeline-date">{{ page.date | date(format="%Y-%m-%d") }}</div>
+        <div class="timeline-content">
+            <h2 class="timeline-title"><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
+            {% if page.taxonomies.tags %}
+            <div class="timeline-tags">
+                {% for tag in page.taxonomies.tags %}
+                <span class="tag">{{ tag }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
     </article>
     {% endfor %}
 </div>
@@ -34,5 +40,34 @@
     <a href="{{ paginator.next }}" class="btn">Older Posts →</a>
     {% endif %}
 </nav>
+{% endif %}
+
+{% else %}
+{% set current_year = "" %}
+{% for page in section.pages | sort(attribute="date") | reverse %}
+{% set page_year = page.date | date(format="%Y") %}
+{% if page_year != current_year %}
+{% if current_year != "" %}
+</ul>
+{% endif %}
+<h2 class="timeline-year">{{ page_year }}</h2>
+<ul class="timeline-list">
+{% set current_year = page_year %}
+{% endif %}
+<li class="timeline-item">
+    <span class="timeline-date">{{ page.date | date(format="%m-%d") }}</span>
+    <a href="{{ page.permalink }}" class="timeline-title">{{ page.title }}</a>
+    {% if page.taxonomies.tags %}
+    <div class="timeline-tags">
+        {% for tag in page.taxonomies.tags %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+    </div>
+    {% endif %}
+</li>
+{% endfor %}
+{% if current_year != "" %}
+</ul>
+{% endif %}
 {% endif %}
 {% endblock %}
