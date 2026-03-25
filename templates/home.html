@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% set lang = current_path | truncate(l=3, end="") | trim(start="/") %}
-{% if lang != "en" %}{% set_global lang = "zh" %}{% endif %}
-{% set i18n = load_data(path="themes/x-theme/i18n/" ~ lang ~ ".toml") %}
 <div class="home-grid">
     {% set hero_post = get_section(path="posts/_index.md") %}
     {% if hero_post.pages %}

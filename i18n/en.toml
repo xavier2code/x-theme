@@ -5,8 +5,13 @@ tags = "Tags"
 categories = "Categories"
 about = "About"
 contact = "Contact"
+previous = "Previous"
+next = "Next"
 
 [common]
 read_more = "Read More"
 all_posts = "All Posts"
+posts = "posts"
+
+[taxonomy]
 posts = "posts"

@@ -5,8 +5,13 @@ tags = "标签"
 categories = "分类"
 about = "关于"
 contact = "联系"
+previous = "上一篇"
+next = "下一篇"
 
 [common]
 read_more = "阅读更多"
 all_posts = "所有文章"
+posts = "篇文章"
+
+[taxonomy]
 posts = "篇文章"

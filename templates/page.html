@@ -10,7 +10,7 @@
         <div class="post-meta">
             <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
             {% if page.taxonomies.tags %}
-            • Tags: {% for tag in page.taxonomies.tags %}{{ tag }}{% if not loop.last %}, {% endif %}{% endfor %}
+            • {{ i18n.nav.tags }}: {% for tag in page.taxonomies.tags %}{{ tag }}{% if not loop.last %}, {% endif %}{% endfor %}
             {% endif %}
         </div>
     </header>
