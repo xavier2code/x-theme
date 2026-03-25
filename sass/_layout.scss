@@ -109,6 +109,58 @@ $duration-slow: 400ms;
     gap: $spacing-lg;
 }
 
+// Timeline (Archive)
+.timeline-year {
+    font-family: $font-heading;
+    font-size: 2rem;
+    font-weight: 900;
+    color: $accent-color;
+    margin: $spacing-xl 0 $spacing-md;
+    padding-bottom: $spacing-xs;
+    border-bottom: 4px solid $border-color;
+    text-shadow: 3px 3px 0 rgba($accent-color, 0.3);
+}
+
+.timeline-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 $spacing-xl;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: baseline;
+    gap: $spacing-md;
+    padding: $spacing-sm 0;
+    border-bottom: 1px dashed rgba($border-color, 0.3);
+
+    .timeline-date {
+        font-family: $font-heading;
+        font-weight: 700;
+        font-size: 0.875rem;
+        color: $text-color;
+        min-width: 50px;
+    }
+
+    .timeline-title {
+        font-family: $font-heading;
+        font-weight: 700;
+        color: $text-color;
+        text-decoration: none;
+
+        &:hover {
+            color: $accent-color;
+        }
+    }
+
+    .timeline-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-xs;
+        margin-left: auto;
+    }
+}
+
 // Single Post Layout
 .post-layout {
     max-width: $content-width;

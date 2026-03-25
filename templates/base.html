@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="{{ get_url(path="main.css") }}">
 </head>
 <body>
+    {% set lang = current_path | truncate(l=3, end="") | trim(start="/") %}
+    {% if lang != "en" %}{% set_global lang = "zh" %}{% endif %}
+    {% set i18n = load_data(path="themes/x-theme/i18n/" ~ lang ~ ".toml") %}
+    
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
@@ -22,12 +26,19 @@
                 <span></span>
             </button>
             <div class="nav-links">
-                <a href="{{ get_url(path="/") }}" class="nav-link {% if current_path == "/" %}active{% endif %}">HOME</a>
-                <a href="{{ get_url(path="archives") }}" class="nav-link {% if current_path == "/archives" %}active{% endif %}">ARCHIVE</a>
-                <a href="{{ get_url(path="tags") }}" class="nav-link {% if current_path is starting_with("/tags") %}active{% endif %}">TAGS</a>
-                <a href="{{ get_url(path="categories") }}" class="nav-link {% if current_path is starting_with("/categories") %}active{% endif %}">CATEGORIES</a>
-                <a href="{{ get_url(path="about") }}" class="nav-link {% if current_path == "/about" %}active{% endif %}">ABOUT</a>
-                <a href="{{ get_url(path="contact") }}" class="nav-link {% if current_path == "/contact" %}active{% endif %}">CONTACT</a>
+                <a href="{{ get_url(path="/") }}" class="nav-link {% if current_path == "/" %}active{% endif %}">{{ i18n.nav.home }}</a>
+                <a href="{{ get_url(path="archives") }}" class="nav-link {% if current_path == "/archives" %}active{% endif %}">{{ i18n.nav.archive }}</a>
+                <a href="{{ get_url(path="tags") }}" class="nav-link {% if current_path is starting_with("/tags") %}active{% endif %}">{{ i18n.nav.tags }}</a>
+                <a href="{{ get_url(path="categories") }}" class="nav-link {% if current_path is starting_with("/categories") %}active{% endif %}">{{ i18n.nav.categories }}</a>
+                <a href="{{ get_url(path="about") }}" class="nav-link {% if current_path == "/about" %}active{% endif %}">{{ i18n.nav.about }}</a>
+                <a href="{{ get_url(path="contact") }}" class="nav-link {% if current_path == "/contact" %}active{% endif %}">{{ i18n.nav.contact }}</a>
+                <div class="lang-switcher">
+                    {% if lang == "zh" %}
+                    <a href="/en{{ current_path }}" class="lang-btn">EN</a>
+                    {% else %}
+                    <a href="{{ current_path | replace(from="/en", to="") }}" class="lang-btn">中文</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </nav>
