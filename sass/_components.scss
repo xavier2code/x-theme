@@ -283,6 +283,8 @@ $duration-slow: 400ms;
 .lang-switcher {
     display: flex;
     gap: $spacing-xs;
+    margin-left: auto;
+    align-items: center;
     
     .lang-btn {
         font-family: $font-heading;
