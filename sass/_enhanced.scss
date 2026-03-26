@@ -1,0 +1,203 @@
+// Layout Enhancement Components
+
+// Columns
+.columns-2 {
+    column-count: 2;
+    column-gap: $spacing-lg;
+    
+    @media (max-width: 768px) {
+        column-count: 1;
+    }
+}
+
+.columns-3 {
+    column-count: 3;
+    column-gap: $spacing-lg;
+    
+    @media (max-width: 1024px) {
+        column-count: 2;
+    }
+    
+    @media (max-width: 768px) {
+        column-count: 1;
+    }
+}
+
+.columns-4 {
+    column-count: 4;
+    column-gap: $spacing-lg;
+    
+    @media (max-width: 1024px) {
+        column-count: 3;
+    }
+    
+    @media (max-width: 768px) {
+        column-count: 2;
+    }
+    
+    @media (max-width: 480px) {
+        column-count: 1;
+    }
+}
+
+// Blockquote
+.blockquote {
+    border-left: 4px solid $primary-color;
+    padding-left: $spacing-lg;
+    margin: $spacing-lg 0;
+    font-size: 1.125rem;
+    font-style: italic;
+    color: $slate;
+    
+    p:last-child {
+        margin-bottom: 0;
+    }
+    
+    &--accent {
+        border-left-color: $accent-color;
+        
+        &::before {
+            content: '"';
+            font-family: $font-heading;
+            font-weight: 900;
+            font-size: 3rem;
+            color: $accent-light;
+            display: block;
+            margin-bottom: -$spacing-md;
+        }
+    }
+    
+    &--purple {
+        border-left-color: $purple;
+        
+        &::before {
+            content: '"';
+            font-family: $font-heading;
+            font-weight: 900;
+            font-size: 3rem;
+            color: $purple-light;
+            display: block;
+            margin-bottom: -$spacing-md;
+        }
+    }
+    
+    &--emerald {
+        border-left-color: $emerald;
+        
+        &::before {
+            content: '"';
+            font-family: $font-heading;
+            font-weight: 900;
+            font-size: 3rem;
+            color: $emerald-light;
+            display: block;
+            margin-bottom: -$spacing-md;
+        }
+    }
+}
+
+// Alerts
+.alert {
+    border: $border;
+    padding: $spacing-md $spacing-lg;
+    margin: $spacing-lg 0;
+    position: relative;
+    box-shadow: $shadow-sm;
+    
+    &--info {
+        background: $primary-light;
+        border-left: 4px solid $primary-color;
+    }
+    
+    &--success {
+        background: $emerald-light;
+        border-left: 4px solid $emerald;
+    }
+    
+    &--warning {
+        background: rgba(#fbbf24, 0.1);
+        border-left: 4px solid #fbbf24;
+    }
+    
+    &--error {
+        background: $rose-light;
+        border-left: 4px solid $rose;
+    }
+}
+
+.alert-title {
+    font-family: $font-heading;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: $spacing-xs;
+    
+    .alert--info & { color: $primary-color; }
+    .alert--success & { color: darken($emerald, 10%); }
+    .alert--warning & { color: darken(#fbbf24, 15%); }
+    .alert--error & { color: $rose; }
+}
+
+.alert-content {
+    font-size: 0.9375rem;
+    color: $text-color;
+    
+    p:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.alert-icon {
+    position: absolute;
+    top: $spacing-md;
+    right: $spacing-md;
+    font-size: 1.25rem;
+    opacity: 0.5;
+}
+
+// Code Block Enhancement
+.code-block {
+    position: relative;
+    margin: $spacing-lg 0;
+    
+    pre {
+        margin: 0;
+    }
+}
+
+.code-copy-btn {
+    position: absolute;
+    top: $spacing-sm;
+    right: $spacing-sm;
+    background: $white;
+    border: 2px solid $border-color;
+    padding: $spacing-xs $spacing-sm;
+    font-family: $font-heading;
+    font-weight: 700;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: background-color $duration-fast $ease-smooth,
+                color $duration-fast $ease-smooth;
+    will-change: background-color, color;
+    
+    &:hover {
+        background: $accent-color;
+        color: $white;
+    }
+    
+    &.copied {
+        background: $emerald;
+        color: $white;
+        border-color: $emerald;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .alert,
+    .blockquote {
+        transition: none;
+    }
+    
+    .code-copy-btn {
+        transition: none;
+    }
+}
