@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ i18n.error.page_not_found_title }} — {{ config.title }}</title>
+    <title>404 — {{ config.title }}</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ get_url(path="main.css") }}">
 </head>
 <body class="error-page">
-    {% if current_path is starting_with("/en") %}
+    {% if current_path is defined and current_path is starting_with("/en") %}
         {% set lang = "en" %}
     {% else %}
         {% set lang = "zh" %}

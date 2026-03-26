@@ -11,7 +11,6 @@
 </header>
 
 {% set hero_post = get_section(path="posts/_index.md") %}
-{% set taxonomies = get_taxonomies() %}
 
 <!-- STATS -->
 <div class="section-wrap">
@@ -21,11 +20,11 @@
             <span class="stat-label">{{ i18n.common.posts }}</span>
         </div>
         <div class="stat-item">
-            <span class="stat-number">{{ taxonomies.categories | length }}</span>
+            <span class="stat-number">--</span>
             <span class="stat-label">{{ i18n.nav.categories }}</span>
         </div>
         <div class="stat-item">
-            <span class="stat-number">{{ taxonomies.tags | length }}</span>
+            <span class="stat-number">--</span>
             <span class="stat-label">{{ i18n.nav.tags }}</span>
         </div>
         <div class="stat-item">
