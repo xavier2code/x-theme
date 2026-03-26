@@ -1,40 +1,158 @@
 {% extends "base.html" %}
 
-{% block content %}
-<div class="home-grid">
-    {% set hero_post = get_section(path="posts/_index.md") %}
-    {% if hero_post.pages %}
-    {% set latest = hero_post.pages | first %}
-    <article class="hero-post">
-        <div class="card">
-            {% if latest.extra.cover %}
-            <img src="{{ get_url(path=latest.extra.cover) }}" alt="{{ latest.title }}" class="card-image">
-            {% else %}
-            <div class="card-image" style="background: linear-gradient(135deg, #2563eb 0%, #ff6b35 100%);"></div>
-            {% endif %}
-            <div class="card-content">
-                {% if latest.taxonomies.categories %}
-                <span class="badge">{{ latest.taxonomies.categories[0] }}</span>
-                {% endif %}
-                <h2 class="card-title"><a href="{{ latest.permalink }}">{{ latest.title }}</a></h2>
-                <p class="card-meta">{{ latest.date | date(format="%B %d, %Y") }}</p>
-                <p class="card-excerpt">{{ latest.description }}</p>
-                <a href="{{ latest.permalink }}" class="btn btn-primary">{{ i18n.common.read_more }}</a>
-            </div>
-        </div>
-    </article>
+{% block marquee %}
+{% set hero_post = get_section(path="posts/_index.md") %}
+<script>
+window.__MARQUEE_DATA__ = [
+    {% if hero_post and hero_post.pages %}
+    {% for page in hero_post.pages | slice(end=5) %}
+    {title: "{{ page.title | safe }}", date: "{{ page.date | date(format="%Y-%m-%d") }}"},
+    {% endfor %}
     {% endif %}
-    
-    <aside class="sidebar-posts">
-        {% for page in hero_post.pages | slice(start=1, end=5) %}
-        <article class="card">
-            {% if page.taxonomies.categories %}
-            <span class="badge">{{ page.taxonomies.categories[0] }}</span>
-            {% endif %}
-            <h3 class="card-title"><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
-            <p class="card-meta">{{ page.date | date(format="%B %d, %Y") }}</p>
-        </article>
-        {% endfor %}
-    </aside>
+];
+</script>
+{% if config.extra.marquee_text %}
+<div class="marquee-wrap">
+    <div class="marquee-track">
+        <span>×</span>
+        {{ config.extra.marquee_text }}
+        <span>×</span>
+        {{ config.extra.marquee_text }}
+        <span>×</span>
+    </div>
 </div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% set hero_post = get_section(path="posts/_index.md") %}
+
+<!-- MASTHEAD -->
+<header class="masthead">
+    <div class="masthead__label">Personal Blog × {{ now() | date(format="%Y") }}</div>
+    <h1 class="masthead__title">
+        xavier<br><em>2</em>code
+    </h1>
+    <p class="masthead__sub">// FULL-STACK DEVELOPER · WUHAN, CHINA · WRITING ABOUT AI, CODE &amp; DESIGN</p>
+</header>
+
+{% if hero_post and hero_post.pages %}
+
+<!-- HERO IMAGE -->
+<section class="section-wrap">
+    <img
+        src="{{ get_url(path="imgs/hero.jpg") }}"
+        alt="Hero — 90s magazine collage"
+        class="hero-img reveal"
+        loading="eager"
+    >
+</section>
+
+<!-- FEATURED POSTS -->
+<div class="section-wrap reveal">
+    <div class="section-num">01</div>
+    <h2 class="section-title">Latest Posts</h2>
+    <div class="section-rule"></div>
+
+    <div class="featured-grid">
+        {% set latest = hero_post.pages | first %}
+        <div class="featured-card">
+            <article class="post-card">
+                {% if latest.extra.cover %}
+                <img src="{{ get_url(path=latest.extra.cover) }}" alt="{{ latest.title }}" class="post-card__img" loading="lazy">
+                {% endif %}
+                <span class="post-card__tag">{% if latest.taxonomies.categories %}{{ latest.taxonomies.categories[0] }}{% endif %}</span>
+                <h3 class="post-card__title">{{ latest.title }}</h3>
+                <p class="post-card__date">{{ latest.date | date(format="%Y-%m-%d") }}</p>
+                <p class="post-card__excerpt">{{ latest.description }}</p>
+                <a href="{{ latest.permalink }}" class="post-card__link">READ →</a>
+            </article>
+        </div>
+
+        {% for page in hero_post.pages | slice(start=1, end=3) %}
+        <div class="{% if loop.index == 1 %}side-card-1{% else %}side-card-2{% endif %}">
+            <article class="post-card">
+                {% if page.extra.cover %}
+                <img src="{{ get_url(path=page.extra.cover) }}" alt="{{ page.title }}" class="post-card__img" loading="lazy">
+                {% endif %}
+                <span class="post-card__tag">{% if page.taxonomies.categories %}{{ page.taxonomies.categories[0] }}{% endif %}</span>
+                <h3 class="post-card__title">{{ page.title }}</h3>
+                <p class="post-card__date">{{ page.date | date(format="%Y-%m-%d") }}</p>
+                <p class="post-card__excerpt">{{ page.description }}</p>
+                <a href="{{ page.permalink }}" class="post-card__link">READ →</a>
+            </article>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<hr class="marquee-divider">
+
+<!-- ABOUT -->
+<div class="section-wrap reveal">
+    <div class="section-num">02</div>
+    <h2 class="section-title">About</h2>
+    <div class="section-rule"></div>
+
+    <div class="about-split">
+        <blockquote class="about-quote">
+            代码即表达。<br>AI是新的创意媒介。
+        </blockquote>
+        <div class="about-right">
+            <img src="{{ get_url(path="imgs/avatar.jpg") }}" alt="Avatar" class="about-avatar" loading="lazy">
+            <p class="about-bio">
+                <strong>xavier2code</strong>，武汉，全栈开发者和独立技术写作者。
+                关注 <strong>AI、大模型、开源工具</strong>，偶尔折腾折腾设计与排版。
+                这个博客记录技术观察、工具使用和行业思考。
+            </p>
+            <a href="{{ get_url(path="about") }}" class="post-card__link">MORE ABOUT →</a>
+        </div>
+    </div>
+</div>
+
+<hr class="marquee-divider">
+
+<!-- ARCHIVE -->
+<div class="section-wrap reveal">
+    <div class="section-num">03</div>
+    <h2 class="section-title">Archive</h2>
+    <div class="section-rule"></div>
+
+    <div class="post-list">
+        {% for page in hero_post.pages %}
+        <a href="{{ page.permalink }}" class="post-row reveal">
+            <span class="post-row__num">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
+            <span class="post-row__title">{{ page.title }}</span>
+            {% if page.taxonomies.categories %}
+            <span class="post-row__cat">{{ page.taxonomies.categories[0] }}</span>
+            {% endif %}
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-strip reveal">
+    <h2>Stay in the loop.</h2>
+    <p>// NEW POSTS EVERY MORNING AT 09:00 BEIJING TIME</p>
+    <a href="{{ get_url(path="archives") }}" class="btn-system">VIEW ALL POSTS →</a>
+</div>
+
+{% endif %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.post-card').forEach(function(card) {
+        card.addEventListener('click', function(e) {
+            if (e.target.tagName !== 'A') {
+                var link = card.querySelector('.post-card__link');
+                if (link) {
+                    window.location.href = link.href;
+                }
+            }
+        });
+    });
+
+});
+</script>
 {% endblock %}

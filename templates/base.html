@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ config.title }}{% endblock %}</title>
     
-    <!-- Google Fonts: Playfair Display + Noto Serif SC -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@400;500;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="{{ get_url(path="main.css") }}">
 </head>
@@ -20,85 +19,72 @@
     {% endif %}
     {% set i18n = load_data(path="themes/x-theme/i18n/" ~ lang ~ ".toml") %}
     
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-container">
-            <button class="nav-toggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <div class="nav-links">
-                <a href="{{ get_url(path="/") }}" class="nav-link {% if current_path == "/" %}active{% endif %}">{{ i18n.nav.home }}</a>
-                <a href="{{ get_url(path="archives") }}" class="nav-link {% if current_path == "/archives" %}active{% endif %}">{{ i18n.nav.archive }}</a>
-                <a href="{{ get_url(path="tags") }}" class="nav-link {% if current_path is starting_with("/tags") %}active{% endif %}">{{ i18n.nav.tags }}</a>
-                <a href="{{ get_url(path="categories") }}" class="nav-link {% if current_path is starting_with("/categories") %}active{% endif %}">{{ i18n.nav.categories }}</a>
-                <a href="{{ get_url(path="about") }}" class="nav-link {% if current_path == "/about" %}active{% endif %}">{{ i18n.nav.about }}</a>
-                <a href="{{ get_url(path="contact") }}" class="nav-link {% if current_path == "/contact" %}active{% endif %}">{{ i18n.nav.contact }}</a>
-            </div>
-            <div class="lang-switcher">
-                {% if current_path is starting_with("/en") %}
-                <a href="{{ current_path | replace(from="/en", to="") }}" class="lang-btn">中文</a>
-                {% else %}
-                <a href="/en{{ current_path }}" class="lang-btn">EN</a>
-                {% endif %}
-            </div>
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="{{ i18n.search.placeholder }}" aria-label="{{ i18n.search.placeholder }}">
-                <div class="search-results"></div>
-            </div>
+    {% block marquee %}
+    {% if config.extra.marquee_text %}
+    <div class="marquee-wrap">
+        <div class="marquee-track">
+            <span>×</span>
+            {{ config.extra.marquee_text }}
+            <span>×</span>
+            {{ config.extra.marquee_text }}
+            <span>×</span>
         </div>
+    </div>
+    {% endif %}
+    {% endblock %}
+
+    <nav class="topnav">
+        <a href="{{ get_url(path="/") }}" class="topnav__brand {% if current_path == "/" %}active{% endif %}">× X2C</a>
+        <a href="{{ get_url(path="/") }}" class="{% if current_path == "/" %}active{% endif %}">Home</a>
+        <a href="{{ get_url(path="about") }}" class="{% if current_path == "/about" %}active{% endif %}">About</a>
+        <a href="{{ get_url(path="archives") }}" class="{% if current_path is starting_with("/archives") %}active{% endif %}">Archive</a>
     </nav>
 
-    <!-- Main Content -->
     <main class="main">
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Marquee Ticker -->
-    {% if config.extra.marquee_text %}
-    <div class="marquee">
-        <div class="marquee-content">
-            <span>{{ config.extra.marquee_text }}</span>
-            <span aria-hidden="true">{{ config.extra.marquee_text }}</span>
-        </div>
-    </div>
-    {% endif %}
-
-    <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; {{ now() | date(format="%Y") }} {{ config.title }}. Built with Zola.</p>
-            {% if config.extra.github_url or config.extra.twitter_url %}
-            <div class="social-links">
+        <div class="footer-inner">
+            <span>© {{ now() | date(format="%Y") }} {{ config.title }} · Built with Zola</span>
+            <div class="footer-links">
+                <a href="{{ get_url(path="/") }}">Home</a>
+                <a href="{{ get_url(path="about") }}">About</a>
+                <a href="{{ get_url(path="archives") }}">Archive</a>
                 {% if config.extra.github_url %}
                 <a href="{{ config.extra.github_url }}" target="_blank" rel="noopener">GitHub</a>
                 {% endif %}
-                {% if config.extra.twitter_url %}
-                <a href="{{ config.extra.twitter_url }}" target="_blank" rel="noopener">Twitter</a>
-                {% endif %}
             </div>
-            {% endif %}
         </div>
     </footer>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const toggle = document.querySelector('.nav-toggle');
-    const links = document.querySelector('.nav-links');
-    
-    if (toggle && links) {
-        toggle.addEventListener('click', function() {
-            toggle.classList.toggle('open');
-            links.classList.toggle('open');
-        });
-    }
-});
-</script>
-<script src="{{ get_url(path="js/search.js") }}"></script>
-<script src="{{ get_url(path="js/accordion.js") }}"></script>
-<script src="{{ get_url(path="js/tabs.js") }}"></script>
-<script src="{{ get_url(path="js/modal.js") }}"></script>
-<script src="{{ get_url(path="js/tooltip.js") }}"></script>
-<script>window.SEARCH_BASE = "{{ get_url(path="/") }}";</script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+        reveals.forEach(el => observer.observe(el));
+
+        if (window.__MARQUEE_DATA__ && window.__MARQUEE_DATA__.length > 0) {
+            var marqueeTrack = document.querySelector('.marquee-track');
+            if (marqueeTrack) {
+                var html = '<span>×</span>';
+                window.__MARQUEE_DATA__.forEach(function(item) {
+                    html += item.title + ' · ' + item.date + ' <span>×</span>';
+                });
+                window.__MARQUEE_DATA__.forEach(function(item) {
+                    html += item.title + ' · ' + item.date + ' <span>×</span>';
+                });
+                marqueeTrack.innerHTML = html;
+            }
+        }
+    });
+    </script>
 </body>
 </html>

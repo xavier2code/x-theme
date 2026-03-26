@@ -15,8 +15,7 @@ body {
     color: $text-color;
     line-height: 1.6;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -57,8 +56,15 @@ img {
 
 .main {
     flex: 1;
-    max-width: $max-width;
-    margin: 0 auto;
-    padding: $spacing-lg $spacing-md;
-    width: 100%;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    
+    &.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

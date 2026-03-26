@@ -1,55 +1,407 @@
 {% extends "base.html" %}
 
 {% block content %}
-<article class="post-layout">
-    <header class="post-header">
-        {% if page.extra.cover %}
-        <img src="{{ get_url(path=page.extra.cover) }}" class="post-cover" alt="{{ page.title }}">
-        {% endif %}
-        {% if page.taxonomies.categories %}
-        <span class="badge">{{ page.taxonomies.categories[0] }}</span>
-        {% endif %}
-        <h1>{{ page.title }}</h1>
-        <div class="post-meta">
-            <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
-            {% if page.taxonomies.tags %}
-            • {{ i18n.nav.tags }}: {% for tag in page.taxonomies.tags %}{{ tag }}{% if not loop.last %}, {% endif %}{% endfor %}
-            {% endif %}
+{% if page.path is containing("about") %}
+<!-- ABOUT PAGE - kept separate -->
+
+{% else %}
+<!-- REGULAR POST PAGE -->
+{% endif %}
+
+{% if page.path is containing("about") %}
+<!-- ABOUT HERO -->
+<div class="section-wrap">
+    <div class="about-hero reveal">
+        <div class="about-hero__img-wrap">
+            <img src="{{ get_url(path="imgs/featured1.jpg") }}" alt="Portrait" class="about-hero__img">
+            <div class="about-hero__img-stamp">EST. 2024</div>
         </div>
-    </header>
-    
-    <div class="post-content">
-        {{ page.content | safe }}
-    </div>
-    
-    {% if page.extra.accordion %}
-    <div class="accordion">
-      {% for item in page.extra.accordion %}
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false">
-          {{ item.title }}
-        </button>
-        <div class="accordion-content" aria-hidden="true">
-          <div class="accordion-body">
-            {{ item.content }}
-          </div>
+        <div>
+            <div class="about-hero__label">// WHO IS THIS PERSON</div>
+            <h1 class="about-hero__name">Xavier<br><em>2</em>code</h1>
+            <p class="about-hero__role">FULL-STACK DEVELOPER · WUHAN, CHINA</p>
+            <div class="about-hero__bio">
+                <p>我是 <strong>xavier2code</strong>，一个在代码和文字之间来回横跳的独立开发者。白天写工程代码，晚上写技术博客，偶尔折腾设计和排版。</p>
+                <p>这个 blog 用 <strong>Zola</strong> 搭建，部署在 <strong>GitHub Pages</strong>，跑在 <strong>OpenClaw</strong> 上——是的，连 blog 的更新都是 AI 在自动完成的。</p>
+                <p>关注领域：<strong>AI 大模型，开源工具、全栈开发</strong>。业余时间研究 90 年代平面设计和复古排版美学。</p>
+            </div>
         </div>
-      </div>
-      {% endfor %}
     </div>
+</div>
+
+<!-- SKILLS -->
+<div class="section-wrap reveal">
+    <div class="section-num">01</div>
+    <h2 class="section-title">Stack &amp; Skills</h2>
+    <div class="section-rule"></div>
+    <div class="skills-grid">
+        <div class="skill-card">
+            <div class="skill-card__name"><span class="skill-card__dot"></span>Frontend</div>
+            <div class="skill-card__desc">React, Vue, TypeScript, TailwindCSS, CSS Art</div>
+            <div class="skill-card__bar"><div class="skill-card__fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-card">
+            <div class="skill-card__name"><span class="skill-card__dot"></span>Backend</div>
+            <div class="skill-card__desc">Node.js, Python, Rust, Go, PostgreSQL</div>
+            <div class="skill-card__bar"><div class="skill-card__fill" style="width:78%"></div></div>
+        </div>
+        <div class="skill-card">
+            <div class="skill-card__name"><span class="skill-card__dot"></span>AI / LLM</div>
+            <div class="skill-card__desc">OpenAI API, Claude, RAG, LangChain, Ollama</div>
+            <div class="skill-card__bar"><div class="skill-card__fill" style="width:82%"></div></div>
+        </div>
+        <div class="skill-card">
+            <div class="skill-card__name"><span class="skill-card__dot"></span>DevOps</div>
+            <div class="skill-card__desc">Docker, GitHub Actions, Nginx, Linux, Shell</div>
+            <div class="skill-card__bar"><div class="skill-card__fill" style="width:75%"></div></div>
+        </div>
+        <div class="skill-card">
+            <div class="skill-card__name"><span class="skill-card__dot"></span>Tools</div>
+            <div class="skill-card__desc">Zola, Git, Vim, Figma, Obsidian</div>
+            <div class="skill-card__bar"><div class="skill-card__fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-card">
+            <div class="skill-card__name"><span class="skill-card__dot"></span>Design</div>
+            <div class="skill-card__desc">90s Print Aesthetic, Grid Systems, Typography</div>
+            <div class="skill-card__bar"><div class="skill-card__fill" style="width:65%"></div></div>
+        </div>
+    </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="section-wrap reveal">
+    <div class="section-num">02</div>
+    <h2 class="section-title">Timeline</h2>
+    <div class="section-rule"></div>
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-item__year">2026 — NOW</div>
+            <div class="timeline-item__title">Independent AI Developer</div>
+            <div class="timeline-item__desc">全职独立开发，运营个人 blog、构建 AI 原型项目，研究 AI + 出版/内容的交叉领域。</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-item__year">2024 — 2026</div>
+            <div class="timeline-item__title">Senior Full-Stack Engineer · Remote</div>
+            <div class="timeline-item__desc">参与多个 SaaS 产品的后端架构和 AI 功能集成，主导从零搭建 RAG 系统和 AI Agent 产品。</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-item__year">2022 — 2024</div>
+            <div class="timeline-item__title">Frontend Engineer · Wuhan</div>
+            <div class="timeline-item__desc">专注 React 生态和可视化开发，服务于金融和数据可视化类产品。</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-item__year">2019 — 2022</div>
+            <div class="timeline-item__title">CS Degree · University</div>
+            <div class="timeline-item__desc">计算机科学本科，开始折腾个人博客和开源项目。</div>
+        </div>
+    </div>
+</div>
+
+<!-- LINKS -->
+<div class="section-wrap reveal">
+    <div class="section-num">03</div>
+    <h2 class="section-title">Find Me</h2>
+    <div class="section-rule"></div>
+    <div class="links-grid">
+        <a href="https://github.com/xavier2code" class="link-card" target="_blank" rel="noopener">
+            <div class="link-card__icon">⚡</div>
+            <div>
+                <div class="link-card__label">GitHub</div>
+                <div class="link-card__desc">@xavier2code</div>
+            </div>
+        </a>
+        <a href="{{ get_url(path="/") }}" class="link-card" target="_blank" rel="noopener">
+            <div class="link-card__icon">✎</div>
+            <div>
+                <div class="link-card__label">Blog</div>
+                <div class="link-card__desc">xavier2code.github.io/blog</div>
+            </div>
+        </a>
+        <a href="mailto:xavier@example.com" class="link-card">
+            <div class="link-card__icon">◎</div>
+            <div>
+                <div class="link-card__label">Email</div>
+                <div class="link-card__desc">xavier@example.com</div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-strip">
+    <h2>Want to collaborate?</h2>
+    <p>// OPEN TO FREELANCE, OSS &amp; INTERESTING PROJECTS</p>
+    <a href="mailto:xavier@example.com" class="btn-system">GET IN TOUCH →</a>
+</div>
+
+{% else %}
+
+<!-- POST COVER -->
+{% if page.extra.cover %}
+<img src="{{ get_url(path=page.extra.cover) }}" alt="{{ page.title }}" class="post-cover">
+{% endif %}
+
+<!-- POST HEADER -->
+<header class="post-header">
+    {% if page.taxonomies.categories %}
+    <div class="post-header__label">// {{ page.taxonomies.categories[0] }}</div>
     {% endif %}
-    
-    <nav class="post-nav">
-        {% if page.lighter %}
-        <a href="{{ page.lighter.permalink }}" class="prev">
-            <span class="btn">← {{ page.lighter.title }}</span>
-        </a>
+    <h1 class="post-header__title">{{ page.title }}</h1>
+    <div class="post-header__meta">
+        <span>{{ page.date | date(format="%Y-%m-%d") }}</span>
+        {% if page.extra.read_time %}
+        <span>{{ page.extra.read_time }} min read</span>
         {% endif %}
-        {% if page.heavier %}
-        <a href="{{ page.heavier.permalink }}" class="next">
-            <span class="btn">{{ page.heavier.title }} →</span>
-        </a>
+        {% if page.taxonomies.tags %}
+        {% for tag in page.taxonomies.tags %}
+        <span class="post-header__tag">{{ tag }}</span>
+        {% endfor %}
         {% endif %}
-    </nav>
-</article>
+    </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+    <article class="article-body">
+        {{ page.content | safe }}
+    </article>
+    {% if page.toc %}
+    <aside>
+        <nav class="toc">
+            <div class="toc__label">// Contents</div>
+            {% for h2 in page.toc %}
+            <a href="#{{ h2.id }}" class="toc__item">{{ h2.title }}</a>
+            {% for h3 in h2.children %}
+            <a href="#{{ h3.id }}" class="toc__item toc__item--h3">{{ h3.title }}</a>
+            {% endfor %}
+            {% endfor %}
+        </nav>
+    </aside>
+    {% endif %}
+</div>
+
+<!-- RELATED -->
+{% set related_posts = get_section(path="posts/_index.md") %}
+{% if related_posts.pages | length > 1 %}
+<div class="related-section">
+    <h2 class="related-section__title">More Posts</h2>
+    <div class="related-grid">
+        {% for page in related_posts.pages | slice(end=3) %}
+        <a href="{{ page.permalink }}" class="related-card">
+            {% if page.taxonomies.categories %}
+            <span class="related-card__tag">{{ page.taxonomies.categories[0] }}</span>
+            {% endif %}
+            <div class="related-card__title">{{ page.title }}</div>
+            <div class="related-card__date">{{ page.date | date(format="%Y-%m-%d") }}</div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% endif %}
+
+<style>
+{% if page.path is containing("about") %}
+.about-hero {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 3rem;
+    align-items: start;
+    margin-bottom: 3rem;
+}
+.about-hero__img-wrap { position: relative; }
+.about-hero__img {
+    width: 100%; aspect-ratio: 3/4; object-fit: cover;
+    border: 3px solid #1A1A1A; display: block;
+    filter: sepia(10%); box-shadow: 7px 7px 0 rgba(26,26,26,0.18);
+}
+.about-hero__img-stamp {
+    position: absolute; bottom: -1rem; right: -1rem;
+    background: #E85D04; color: #fff;
+    font-family: 'Courier Prime', monospace; font-size: 0.7rem;
+    font-weight: 700; letter-spacing: 0.1em; padding: 0.4rem 0.8rem;
+    transform: rotate(-3deg);
+}
+.about-hero__label {
+    font-family: 'Courier Prime', monospace; font-size: 0.7rem;
+    letter-spacing: 0.2em; color: #E85D04; text-transform: uppercase; margin-bottom: 0.5rem;
+}
+.about-hero__name {
+    font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 900;
+    line-height: 0.95; color: #1A4B8C; margin-bottom: 1rem;
+}
+.about-hero__name em { color: #E85D04; font-style: italic; }
+.about-hero__role {
+    font-family: 'Courier Prime', monospace; font-size: 0.85rem; color: #888;
+    border-left: 4px solid #1A1A1A; padding-left: 1rem; margin-bottom: 1.5rem;
+}
+.about-hero__bio { font-size: 0.95rem; line-height: 1.8; color: #1A1A1A; }
+.about-hero__bio p + p { margin-top: 0.8rem; }
+.about-hero__bio strong { color: #1A4B8C; font-weight: 700; }
+
+.skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem; margin-top: 1.5rem;
+}
+.skill-card {
+    border: 3px solid #1A1A1A; padding: 1.2rem; background: #F5F0E8;
+    position: relative; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.skill-card:hover { transform: translateY(-4px) rotate(-0.5deg); box-shadow: 5px 8px 0 #1A1A1A; }
+.skill-card__dot { width: 10px; height: 10px; background: #E85D04; display: inline-block; margin-right: 0.5rem; }
+.skill-card__name {
+    font-family: 'Courier Prime', monospace; font-size: 0.75rem;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem;
+}
+.skill-card__desc { font-size: 0.82rem; color: #888; line-height: 1.5; }
+.skill-card__bar { height: 3px; background: #1A1A1A; margin-top: 0.8rem; }
+.skill-card__fill { height: 100%; background: #1A4B8C; }
+
+.timeline { position: relative; padding-left: 2rem; }
+.timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #1A1A1A;
+}
+.timeline-item { position: relative; padding-bottom: 2.5rem; }
+.timeline-item::before {
+    content: ''; position: absolute; left: -2.55rem; top: 0.4rem;
+    width: 12px; height: 12px; background: #E85D04; border: 2px solid #1A1A1A;
+}
+.timeline-item__year {
+    font-family: 'Courier Prime', monospace; font-size: 0.7rem;
+    letter-spacing: 0.15em; color: #888; text-transform: uppercase; margin-bottom: 0.3rem;
+}
+.timeline-item__title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; }
+.timeline-item__desc { font-size: 0.85rem; color: #888; line-height: 1.6; }
+
+.links-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem; margin-top: 1.5rem;
+}
+.link-card {
+    display: flex; align-items: center; gap: 1rem;
+    border: 3px solid #1A1A1A; padding: 1rem;
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.link-card:hover { background: #1A4B8C; color: #fff; transform: translateY(-2px); box-shadow: 4px 4px 0 #1A1A1A; }
+.link-card__icon { font-size: 1.4rem; flex-shrink: 0; }
+.link-card__label { font-family: 'Courier Prime', monospace; font-size: 0.78rem; letter-spacing: 0.1em; font-weight: 700; }
+.link-card:hover .link-card__desc { color: rgba(255,255,255,0.7); }
+.link-card__desc { font-size: 0.78rem; color: #888; transition: color 0.15s; }
+
+@media (max-width: 768px) {
+    .about-hero { grid-template-columns: 1fr; }
+    .about-hero__img { aspect-ratio: 4/3; }
+}
+{% else %}
+
+.post-cover {
+    width: 100%; aspect-ratio: 16/6; object-fit: cover;
+    display: block; border-bottom: 3px solid #1A1A1A; filter: sepia(6%);
+}
+
+.post-header {
+    max-width: 900px; margin: 0 auto; padding: 3rem 2rem 2rem;
+}
+.post-header__label {
+    font-family: 'Courier Prime', monospace; font-size: 0.7rem;
+    letter-spacing: 0.2em; color: #E85D04; text-transform: uppercase; margin-bottom: 0.8rem;
+}
+.post-header__title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 1rem;
+}
+.post-header__meta {
+    display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;
+    font-family: 'Courier Prime', monospace; font-size: 0.72rem;
+    color: #888; letter-spacing: 0.08em;
+    border-top: 2px solid rgba(26, 26, 26, 0.1); padding-top: 1rem;
+}
+.post-header__tag {
+    color: #fff; background: #1A4B8C; padding: 0.15rem 0.5rem;
+    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em;
+}
+
+.article-wrap {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 220px; gap: 4rem;
+    padding: 0 2rem 4rem; align-items: start;
+}
+.article-body { font-size: 0.97rem; line-height: 1.85; color: #1A1A1A; }
+
+.toc { position: sticky; top: 2rem; border: 3px solid #1A1A1A; padding: 1.2rem; }
+.toc__label {
+    font-family: 'Courier Prime', monospace; font-size: 0.68rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: #888;
+    margin-bottom: 0.8rem; border-bottom: 2px solid #1A1A1A; padding-bottom: 0.6rem;
+}
+.toc__item {
+    display: block; font-size: 0.82rem; color: #1A1A1A; padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.07); transition: color 0.15s;
+}
+.toc__item:hover { color: #E85D04; }
+.toc__item--h3 { padding-left: 0.8rem; font-size: 0.76rem; }
+.article-body h1 {
+    font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 700;
+    margin: 2.5rem 0 0.8rem; padding-left: 1rem; border-left: 5px solid #E85D04;
+}
+.article-body h2 {
+    font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin: 1.8rem 0 0.5rem;
+}
+.article-body p { margin-bottom: 1rem; }
+.article-body p:first-of-type::first-letter {
+    font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; float: left;
+    line-height: 0.8; margin: 0.1rem 0.15rem 0 0; color: #1A4B8C;
+}
+.article-body blockquote {
+    border-left: 5px solid #1A1A1A; padding: 0.8rem 1.2rem; margin: 1.5rem 0;
+    background: rgba(26, 26, 26, 0.03); font-style: italic;
+}
+.article-body blockquote::before { content: '❝ '; color: #E85D04; font-style: normal; }
+.article-body a { color: #1A4B8C; border-bottom: 1px solid #1A4B8C; }
+.article-body a:hover { color: #E85D04; border-color: #E85D04; }
+.article-body strong { font-weight: 700; }
+.article-body .src {
+    display: block; font-family: 'Courier Prime', monospace; font-size: 0.68rem;
+    color: #888; margin-top: 0.3rem; letter-spacing: 0.04em;
+}
+.article-body .src::before { content: '↗ '; color: #E85D04; }
+
+.related-section {
+    border-top: 3px solid #1A1A1A; padding: 3rem 2rem; max-width: 1100px; margin: 0 auto;
+}
+.related-section__title {
+    font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;
+}
+.related-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem;
+}
+.related-card {
+    border: 3px solid #1A1A1A; padding: 1rem;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.related-card:hover { transform: translateY(-3px); box-shadow: 5px 5px 0 #1A1A1A; }
+.related-card__tag {
+    font-family: 'Courier Prime', monospace; font-size: 0.62rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #fff; background: #1A4B8C;
+    padding: 0.15rem 0.4rem; margin-bottom: 0.5rem; display: inline-block;
+}
+.related-card__title {
+    font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; line-height: 1.3;
+}
+.related-card__date {
+    font-family: 'Courier Prime', monospace; font-size: 0.65rem; color: #888; margin-top: 0.5rem; letter-spacing: 0.06em;
+}
+
+@media (max-width: 768px) {
+    .article-wrap {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem 2rem;
+    }
+    .toc { position: static; }
+}
+{% endif %}
+</style>
 {% endblock %}
