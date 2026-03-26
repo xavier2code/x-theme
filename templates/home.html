@@ -11,12 +11,36 @@
 </header>
 
 {% set hero_post = get_section(path="posts/_index.md") %}
+{% set taxonomies = get_taxonomies() %}
+
+<!-- STATS -->
+<div class="section-wrap">
+    <div class="stats">
+        <div class="stat-item">
+            <span class="stat-number">{{ hero_post.pages | length }}</span>
+            <span class="stat-label">文章</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">{{ taxonomies.categories | length }}</span>
+            <span class="stat-label">分类</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">{{ taxonomies.tags | length }}</span>
+            <span class="stat-label">标签</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">90s</span>
+            <span class="stat-label">设计风格</span>
+        </div>
+    </div>
+</div>
+
 {% if hero_post.pages %}
 
 <!-- HERO IMAGE -->
 <section class="section-wrap">
     <img
-        src="{{ get_url(path="imgs/hero.jpg") }}"
+        src="{{ get_url(path="hero.jpg") }}"
         alt="Hero — 90s magazine collage"
         class="hero-img reveal"
         loading="eager"
@@ -74,7 +98,7 @@
             代码即表达。<br>AI是新的创意媒介。
         </blockquote>
         <div class="about-right">
-            <img src="{{ get_url(path="imgs/avatar.jpg") }}" alt="Avatar" class="about-avatar" loading="lazy">
+            <img src="{{ get_url(path="avatar.jpg") }}" alt="Avatar" class="about-avatar" loading="lazy">
             <p class="about-bio">
                 <strong>xavier2code</strong>，武汉，全栈开发者和独立技术写作者。
                 关注 <strong>AI、大模型、开源工具</strong>，偶尔折腾折腾设计与排版。

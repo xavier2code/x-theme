@@ -558,6 +558,44 @@ github_url = "https://github.com/username"
 twitter_url = "https://twitter.com/username"
 ```
 
+## Customization
+
+### Static Assets Override
+
+Zola uses a **priority cascade** for static files:
+- `your-site/static/` (highest priority)
+- `themes/x-theme/static/`
+
+Place a file with the **same name** in your site's `static/` directory to override the theme default.
+
+#### Default Theme Images
+
+The theme provides these default images in `themes/x-theme/static/`:
+
+| File | Usage |
+|------|-------|
+| `avatar.jpg` | Author avatar |
+| `hero.jpg` | Homepage hero image |
+| `featured1.jpg` | Featured post image 1 |
+| `featured2.jpg` | Featured post image 2 |
+| `featured3.jpg` | Featured post image 3 |
+
+#### Override Example
+
+To use your own avatar:
+
+```bash
+# 1. Place your image in your site's static directory
+cp /path/to/your-avatar.png your-site/static/avatar.jpg
+
+# 2. Build - Zola will use your-site/static/avatar.jpg instead of the theme default
+zola build
+```
+
+Your site's `static/images/` directory (for post-specific images) is **not affected** - it remains separate and is never overridden by the theme.
+
+---
+
 ## Content Format
 
 ```markdown
