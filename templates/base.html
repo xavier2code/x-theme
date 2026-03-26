@@ -20,26 +20,15 @@
     {% set i18n = load_data(path="themes/x-theme/i18n/" ~ lang ~ ".toml") %}
     
     {% block marquee %}
+    {% set marquee_default = config.extra.marquee_text | default(value="") %}
     {% if current_path == "/" %}
-        {% if config.extra.marquee_home %}
-            {% set marquee_content = config.extra.marquee_home %}
-        {% else %}
-            {% set marquee_content = config.extra.marquee_text %}
-        {% endif %}
+        {% set marquee_content = config.extra.marquee_home | default(value=marquee_default) %}
     {% elif current_path is starting_with("/about") %}
-        {% if config.extra.marquee_about %}
-            {% set marquee_content = config.extra.marquee_about %}
-        {% else %}
-            {% set marquee_content = config.extra.marquee_text %}
-        {% endif %}
+        {% set marquee_content = config.extra.marquee_about | default(value=marquee_default) %}
     {% elif current_path is starting_with("/archives") %}
-        {% if config.extra.marquee_archive %}
-            {% set marquee_content = config.extra.marquee_archive %}
-        {% else %}
-            {% set marquee_content = config.extra.marquee_text %}
-        {% endif %}
+        {% set marquee_content = config.extra.marquee_archive | default(value=marquee_default) %}
     {% else %}
-        {% set marquee_content = config.extra.marquee_text %}
+        {% set marquee_content = marquee_default %}
     {% endif %}
     {% if marquee_content %}
     <div class="marquee-wrap">
