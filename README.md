@@ -556,7 +556,15 @@ taxonomies = [
 marquee_text = "★ WELCOME TO MY BLOG ★"
 github_url = "https://github.com/username"
 twitter_url = "https://twitter.com/username"
+archive_posts_count = 4
 ```
+
+| Extra Key | Default | Description |
+|-----------|---------|-------------|
+| `marquee_text` | - | Text displayed in the marquee ticker |
+| `github_url` | - | GitHub profile URL |
+| `twitter_url` | - | Twitter profile URL |
+| `archive_posts_count` | `4` | Number of posts to show on archive page |
 
 ## Customization
 
