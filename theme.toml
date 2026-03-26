@@ -59,3 +59,9 @@ min_version = "0.22"
 #
 # ---- GitHub Link ----
 # github_url = "https://github.com/yourname"
+
+# ============================================
+# Language Switcher (i18n)
+# ============================================
+# lang_switcher_enabled = true   # Enable language switcher in nav
+# lang_switcher_position = "nav-right"  # Options: nav-right, nav-left, footer

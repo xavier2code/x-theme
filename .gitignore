@@ -2,8 +2,14 @@
 .superpowers/
 docs/superpowers/
 
-# Theme only - exclude sample content
-content/
+# Theme only - content belongs in user site, not theme
+# (use example/site for demo)
+/content/
+
+# Example site build artifacts
+example/site/public/
+example/site/themes/
+example/site/target/
 
 # Development files
 AGENTS.md

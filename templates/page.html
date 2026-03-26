@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% set min_read_label = i18n.about.min_read | default(value="min read") %}
+{% set min_read_label = trans(key="min_read", lang=lang) %}
 
 {% if page.path is containing("about") %}
 <!-- ABOUT HERO -->
@@ -12,7 +12,7 @@
             <div class="about-hero__img-stamp">{{ config.extra.about_est | default(value="EST. 2024") }}</div>
         </div>
         <div>
-            <div class="about-hero__label">// {{ i18n.about.who_is_this }}</div>
+            <div class="about-hero__label">// {{ trans(key="who_is_this", lang=lang) }}</div>
             <h1 class="about-hero__name">{{ config.extra.about_name | default(value="Xavier") }}<br><em>{{ config.extra.about_nickname | default(value="2") }}code</em></h1>
             <p class="about-hero__role">{{ config.extra.about_role | default(value="FULL-STACK DEVELOPER · LOCATION") }}</p>
             <div class="about-hero__bio">
@@ -27,7 +27,7 @@
 <!-- SKILLS -->
 <div class="section-wrap reveal">
     <div class="section-num">01</div>
-    <h2 class="section-title">{{ i18n.about.stack_skills }}</h2>
+    <h2 class="section-title">{{ trans(key="stack_skills", lang=lang) }}</h2>
     <div class="section-rule"></div>
     <div class="skills-grid">
         {% for skill in config.extra.skills | default(value=[]) %}
@@ -43,7 +43,7 @@
 <!-- TIMELINE -->
 <div class="section-wrap reveal">
     <div class="section-num">02</div>
-    <h2 class="section-title">{{ i18n.about.timeline }}</h2>
+    <h2 class="section-title">{{ trans(key="timeline", lang=lang) }}</h2>
     <div class="section-rule"></div>
     <div class="timeline">
         {% for item in config.extra.timeline | default(value=[]) %}
@@ -59,7 +59,7 @@
 <!-- LINKS -->
 <div class="section-wrap reveal">
     <div class="section-num">03</div>
-    <h2 class="section-title">{{ i18n.about.find_me }}</h2>
+    <h2 class="section-title">{{ trans(key="find_me", lang=lang) }}</h2>
     <div class="section-rule"></div>
     <div class="links-grid">
         {% if config.extra.github_url %}
@@ -94,9 +94,9 @@
 
 <!-- CTA -->
 <div class="cta-strip">
-    <h2>{{ i18n.about.want_to_collaborate }}</h2>
-    <p>// {{ i18n.about.open_to_projects }}</p>
-    <a href="mailto:{{ config.extra.email | default(value="hello@example.com") }}" class="btn-system">{{ i18n.about.get_in_touch }}</a>
+    <h2>{{ trans(key="want_to_collaborate", lang=lang) }}</h2>
+    <p>// {{ trans(key="open_to_projects", lang=lang) }}</p>
+    <a href="mailto:{{ config.extra.email | default(value="hello@example.com") }}" class="btn-system">{{ trans(key="get_in_touch", lang=lang) }}</a>
 </div>
 
 {% else %}
@@ -149,7 +149,7 @@
 {% set related_posts = get_section(path="posts/_index.md") %}
 {% if related_posts.pages | length > 1 %}
 <div class="related-section">
-    <h2 class="related-section__title">More Posts</h2>
+    <h2 class="related-section__title">{{ trans(key="more_posts", lang=lang) }}</h2>
     <div class="related-grid">
         {% for page in related_posts.pages | slice(end=3) %}
         <a href="{{ page.permalink }}" class="related-card">

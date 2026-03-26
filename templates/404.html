@@ -12,13 +12,6 @@
     <link rel="stylesheet" href="{{ get_url(path="main.css") }}">
 </head>
 <body class="error-page">
-    {% if current_path is defined and current_path is starting_with("/en") %}
-        {% set lang = "en" %}
-    {% else %}
-        {% set lang = "zh" %}
-    {% endif %}
-    {% set i18n = load_data(path="themes/x-theme/i18n/" ~ lang ~ ".toml") %}
-    
     <div class="error-deco error-deco-tl"></div>
     <div class="error-deco error-deco-tr"></div>
     <div class="error-deco error-deco-bl"></div>
@@ -28,12 +21,12 @@
     
     <div class="error-content">
         <div class="error-stamp">ERROR · 404</div>
-        <div class="error-code-label">// {{ i18n.error.system_error }}</div>
-        <h1 class="error-title">{{ i18n.error.lost_in_grid }}</h1>
+        <div class="error-code-label">// {{ trans(key="system_error", lang=lang) }}</div>
+        <h1 class="error-title">{{ trans(key="lost_in_grid", lang=lang) }}</h1>
         <p class="error-message">
-            {{ i18n.error.error_message }}
+            {{ trans(key="error_message", lang=lang) }}
         </p>
-        <a href="{{ get_url(path="/") }}" class="btn-system">{{ i18n.error.back_to_home }}</a>
+        <a href="{{ get_url(path="/") }}" class="btn-system">{{ trans(key="back_to_home", lang=lang) }}</a>
     </div>
     
     <div class="error-marquee-wrap">

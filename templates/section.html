@@ -6,30 +6,30 @@
 {% set display_posts = posts_section.pages | sort(attribute="date") | reverse | slice(end=archive_posts_count) %}
 
 <div class="archive-header">
-    <div class="archive-header__label">// {{ i18n.list.archive_label }}</div>
-    <h1 class="archive-header__title">Every<br>Word.</h1>
-    <p class="archive-header__sub">{{ posts_section.pages | length }} POSTS · {{ now() | date(format="%Y") }}</p>
+    <div class="archive-header__label">// {{ trans(key="archive_label", lang=lang) }}</div>
+    <h1 class="archive-header__title">{{ trans(key="every_word", lang=lang) }}</h1>
+    <p class="archive-header__sub">{{ posts_section.pages | length }} {{ trans(key="posts", lang=lang) | upper }} · {{ now() | date(format="%Y") }}</p>
 </div>
 
 <div class="filter-bar">
-    <button class="filter-btn active" data-filter="all">{{ i18n.filter.all | default(value="All Posts") }}</button>
+    <button class="filter-btn active" data-filter="all">{{ trans(key="all_posts", lang=lang) }}</button>
 </div>
 
 <div class="section-wrap">
     <div class="month-divider reveal"><span class="month-divider__label">{{ now() | date(format="%B %Y") }}</span></div>
 
     <div class="posts-count reveal">
-        SHOWING <strong>{{ display_posts | length }}</strong> OF {{ posts_section.pages | length }} POSTS
+        {{ trans(key="showing_posts", lang=lang) }} <strong>{{ display_posts | length }}</strong> {{ trans(key="of_posts", lang=lang) | upper }} {{ posts_section.pages | length }} {{ trans(key="posts", lang=lang) | upper }}
     </div>
 
     {% for page in display_posts %}
-    <div class="post-item reveal" data-category="{% if page.taxonomies.categories %}{{ page.taxonomies.categories[0] }}{% else %}Uncategorized{% endif %}">
+    <div class="post-item reveal" data-category="{% if page.taxonomies.categories %}{{ page.taxonomies.categories[0] }}{% else %}{{ trans(key="uncategorized", lang=lang) }}{% endif %}">
         <span class="post-item__num">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
         <div>
             <a href="{{ page.permalink }}" class="post-item__title">{{ page.title }}</a>
             <div class="post-item__meta">{{ page.date | date(format="%Y-%m-%d") }}</div>
         </div>
-        <div class="post-item__meta">{% if page.extra.read_time %}{{ page.extra.read_time }} min read{% endif %}</div>
+        <div class="post-item__meta">{% if page.extra.read_time %}{{ page.extra.read_time }} {{ trans(key="min_read", lang=lang) }}{% endif %}</div>
         {% if page.taxonomies.categories %}
         <span class="post-item__tag">{{ page.taxonomies.categories[0] }}</span>
         {% endif %}

@@ -232,20 +232,137 @@ read_time = 5                   # Estimated read time (minutes)
 
 ## Internationalization (i18n)
 
-The theme supports English and Chinese out of the box:
+The theme uses Zola's built-in multilingual system with full support for multiple languages and a language switcher.
 
-- English: `i18n/en.toml`
-- Chinese: `i18n/zh.toml`
+### Configuration
 
-URLs starting with `/en` will use English, others use Chinese by default.
+Add to your site's `zola.toml`:
 
-To add a new language, copy `en.toml` and translate the values.
+```toml
+default_language = "zh"
 
-### Adding New Languages
+[languages]
+[languages.zh]
+title = "我的博客"
 
-1. Copy `i18n/en.toml` to `i18n/[lang].toml`
-2. Translate all values
-3. Add language detection in `base.html` if needed
+[languages.en]
+title = "My Blog"
+generate_feeds = true
+
+[translations]
+nav_home = "首页"
+nav_archive = "归档"
+nav_about = "关于"
+nav_tags = "标签"
+nav_categories = "分类"
+posts = "篇文章"
+masthead_label = "个人博客"
+latest_posts = "最新文章"
+about = "关于"
+archive = "归档"
+cta_title = "保持联系。"
+cta_subtitle = "每周都有新文章"
+view_all_posts = "查看所有文章"
+read_more = "阅读 →"
+more_about = "了解更多 →"
+min_read = "分钟阅读"
+uncategorized = "未分类"
+all_posts = "所有文章"
+earlier = "更早"
+showing_posts = "显示"
+posts_in_month = "篇文章在"
+of_posts = "共"
+archive_label = "归档 — 所有文章"
+every_word = "每一个<br>文字。"
+stack_skills = "技术栈"
+timeline = "时间线"
+find_me = "找到我"
+want_to_collaborate = "想合作？"
+get_in_touch = "联系我 →"
+open_to_projects = "承接自由职业、开源协作与有趣项目"
+who_is_this = "这是谁"
+more_posts = "更多文章"
+built_with = "由 Zola 构建"
+design_style = "设计风格"
+switch_lang = "EN / 中文"
+switch_lang_label = "切换语言"
+system_error = "系统错误 — 页面未找到"
+lost_in_grid = "迷失<br><em>在网格中。</em>"
+error_message = "您查找的页面不存在、已被移动，<br>或者像90年代的屏幕保护程序一样跑掉了。"
+back_to_home = "← 返回首页"
+
+[languages.en.translations]
+nav_home = "Home"
+nav_archive = "Archive"
+nav_about = "About"
+nav_tags = "Tags"
+nav_categories = "Categories"
+posts = "posts"
+masthead_label = "Personal Blog"
+latest_posts = "Latest Posts"
+about = "About"
+archive = "Archive"
+cta_title = "Stay in the loop."
+cta_subtitle = "NEW POSTS EVERY WEEK"
+view_all_posts = "VIEW ALL POSTS"
+read_more = "READ →"
+more_about = "MORE ABOUT →"
+min_read = "min read"
+uncategorized = "Uncategorized"
+all_posts = "All Posts"
+earlier = "Earlier"
+showing_posts = "SHOWING"
+posts_in_month = "POSTS IN"
+of_posts = "OF"
+archive_label = "ARCHIVE — ALL POSTS"
+every_word = "Every<br>Word."
+stack_skills = "Stack & Skills"
+timeline = "Timeline"
+find_me = "Find Me"
+want_to_collaborate = "Want to collaborate?"
+get_in_touch = "GET IN TOUCH →"
+open_to_projects = "OPEN TO FREELANCE, OSS & INTERESTING PROJECTS"
+who_is_this = "WHO IS THIS PERSON"
+more_posts = "More Posts"
+built_with = "Built with Zola"
+design_style = "Design"
+switch_lang = "中文"
+switch_lang_label = "Switch Language"
+system_error = "SYSTEM_ERROR — PAGE_NOT_FOUND"
+lost_in_grid = "Lost in<br><em>the Grid.</em>"
+error_message = "The page you're looking for doesn't exist,<br>has been moved, or ran away like a 90s screensaver."
+back_to_home = "← Back to Home"
+```
+
+### Enable Language Switcher
+
+In your `zola.toml` `[extra]` section:
+
+```toml
+[extra]
+lang_switcher_enabled = true
+```
+
+### Content Structure
+
+Create translated content files with language suffixes:
+
+```
+content/
+├── posts/
+│   ├── _index.md          # Chinese version (default)
+│   ├── _index.en.md       # English version
+│   ├── hello-world.md     # Chinese version
+│   └── hello-world.en.md  # English version
+├── about.md               # Chinese version
+├── about.en.md            # English version
+├── archives.md            # Chinese version
+└── archives.en.md         # English version
+```
+
+URL structure:
+- Chinese (default): `/posts/hello-world/`
+- English: `/en/posts/hello-world/`
 
 ## Filter Buttons
 

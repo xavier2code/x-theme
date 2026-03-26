@@ -44,7 +44,7 @@ window.__MARQUEE_DATA__ = [
 
 <!-- MASTHEAD -->
 <header class="masthead">
-    <div class="masthead__label">{{ i18n.home.masthead_label }} × {{ now() | date(format="%Y") }}</div>
+    <div class="masthead__label">{{ trans(key="masthead_label", lang=lang) }} × {{ now() | date(format="%Y") }}</div>
     <h1 class="masthead__title">
         {{ config.title | split(pat=" ") | first }}<br><em>2</em>code
     </h1>
@@ -66,7 +66,7 @@ window.__MARQUEE_DATA__ = [
 <!-- FEATURED POSTS -->
 <div class="section-wrap reveal">
     <div class="section-num">01</div>
-    <h2 class="section-title">{{ i18n.home.latest_posts }}</h2>
+    <h2 class="section-title">{{ trans(key="latest_posts", lang=lang) }}</h2>
     <div class="section-rule"></div>
 
     <div class="featured-grid">
@@ -80,7 +80,7 @@ window.__MARQUEE_DATA__ = [
                 <h3 class="post-card__title">{{ latest.title }}</h3>
                 <p class="post-card__date">{{ latest.date | date(format="%Y-%m-%d") }}</p>
                 <p class="post-card__excerpt">{{ latest.description }}</p>
-                <a href="{{ latest.permalink }}" class="post-card__link">READ →</a>
+                <a href="{{ latest.permalink }}" class="post-card__link">{{ trans(key="read_more", lang=lang) }}</a>
             </article>
         </div>
 
@@ -94,7 +94,7 @@ window.__MARQUEE_DATA__ = [
                 <h3 class="post-card__title">{{ page.title }}</h3>
                 <p class="post-card__date">{{ page.date | date(format="%Y-%m-%d") }}</p>
                 <p class="post-card__excerpt">{{ page.description }}</p>
-                <a href="{{ page.permalink }}" class="post-card__link">READ →</a>
+                <a href="{{ page.permalink }}" class="post-card__link">{{ trans(key="read_more", lang=lang) }}</a>
             </article>
         </div>
         {% endfor %}
@@ -106,7 +106,7 @@ window.__MARQUEE_DATA__ = [
 <!-- ABOUT -->
 <div class="section-wrap reveal">
     <div class="section-num">02</div>
-    <h2 class="section-title">{{ i18n.home.about }}</h2>
+    <h2 class="section-title">{{ trans(key="about", lang=lang) }}</h2>
     <div class="section-rule"></div>
 
     <div class="about-split">
@@ -118,7 +118,7 @@ window.__MARQUEE_DATA__ = [
             <p class="about-bio">
             {{ config.extra.author_bio | default(value="Full-stack developer and independent technical writer.") }}
         </p>
-            <a href="{{ get_url(path="about") }}" class="post-card__link">MORE ABOUT →</a>
+            <a href="{{ get_url(path="about") }}" class="post-card__link">{{ trans(key="more_about", lang=lang) }}</a>
         </div>
     </div>
 </div>
@@ -128,7 +128,7 @@ window.__MARQUEE_DATA__ = [
 <!-- ARCHIVE -->
 <div class="section-wrap reveal">
     <div class="section-num">03</div>
-    <h2 class="section-title">{{ i18n.home.archive }}</h2>
+    <h2 class="section-title">{{ trans(key="archive", lang=lang) }}</h2>
     <div class="section-rule"></div>
 
     <div class="post-list">
@@ -146,9 +146,9 @@ window.__MARQUEE_DATA__ = [
 
 <!-- CTA -->
 <div class="cta-strip reveal">
-    <h2>{{ i18n.home.cta_title }}</h2>
-    <p>// {{ i18n.home.cta_subtitle }}</p>
-    <a href="{{ get_url(path="archives") }}" class="btn-system">{{ i18n.home.view_all_posts }} →</a>
+    <h2>{{ trans(key="cta_title", lang=lang) }}</h2>
+    <p>// {{ trans(key="cta_subtitle", lang=lang) }}</p>
+    <a href="{{ get_url(path="archives") }}" class="btn-system">{{ trans(key="view_all_posts", lang=lang) }} →</a>
 </div>
 
 {% endif %}

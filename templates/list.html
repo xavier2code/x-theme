@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% set min_read_label = i18n.about.min_read | default(value="min read") %}
-{% set uncategorized_label = i18n.about.uncategorized | default(value="Uncategorized") %}
+{% set min_read_label = trans(key="min_read", lang=lang) %}
+{% set uncategorized_label = trans(key="uncategorized", lang=lang) %}
 <div class="archive-header">
-    <div class="archive-header__label">// {{ i18n.list.archive_label }}</div>
-    <h1 class="archive-header__title">{{ i18n.list.every_word }}</h1>
-    <p class="archive-header__sub">{{ section.pages | length }} {{ i18n.common.posts }} · {{ now() | date(format="%Y") }}</p>
+    <div class="archive-header__label">// {{ trans(key="archive_label", lang=lang) }}</div>
+    <h1 class="archive-header__title">{{ trans(key="every_word", lang=lang) }}</h1>
+    <p class="archive-header__sub">{{ section.pages | length }} {{ trans(key="posts", lang=lang) }} · {{ now() | date(format="%Y") }}</p>
 </div>
 
 <div class="filter-bar">
-    <button class="filter-btn active" data-filter="all">{{ i18n.filter.all | default(value="All Posts") }}</button>
+    <button class="filter-btn active" data-filter="all">{{ trans(key="all_posts", lang=lang) }}</button>
 </div>
 
 <div class="section-wrap">
@@ -30,7 +30,7 @@
     {% if current_month_pages %}
     <div class="month-divider reveal"><span class="month-divider__label">{{ now() | date(format="%B %Y") }}</span></div>
     <div class="posts-count reveal">
-        {{ i18n.list.showing_posts }} <strong>{{ current_month_pages | length }}</strong> {{ i18n.list.posts_in_month | upper }} {{ now() | date(format="%B %Y") | upper }}
+        {{ trans(key="showing_posts", lang=lang) }} <strong>{{ current_month_pages | length }}</strong> {{ trans(key="posts_in_month", lang=lang) | upper }} {{ now() | date(format="%B %Y") | upper }}
     </div>
     {% for page in current_month_pages %}
     <div class="post-item reveal" data-category="{% if page.taxonomies.categories %}{{ page.taxonomies.categories[0] }}{% else %}{{ uncategorized_label }}{% endif %}">
@@ -48,7 +48,7 @@
     {% endif %}
     
     {% if earlier_pages %}
-    <div class="month-divider reveal"><span class="month-divider__label">{{ i18n.list.earlier }}</span></div>
+    <div class="month-divider reveal"><span class="month-divider__label">{{ trans(key="earlier", lang=lang) }}</span></div>
     {% set earlier_start_index = current_month_pages | length %}
     {% for page in earlier_pages %}
     {% set item_index = earlier_start_index + loop.index %}

@@ -70,14 +70,6 @@ zola check
 │   ├── _components.scss   # Navigation, cards, buttons
 │   ├── _layout.scss       # Page layouts
 │   └── _marquee.scss      # Marquee animation
-├── static/               # Static assets
-│   ├── hero.jpg          # Homepage hero image
-│   ├── avatar.jpg         # Author avatar
-│   ├── featured*.jpg      # About page images
-│   └── js/               # JavaScript
-├── i18n/                 # Internationalization
-│   ├── en.toml           # English translations
-│   └── zh.toml           # Chinese translations
 └── theme.toml            # Theme configuration
 ```
 

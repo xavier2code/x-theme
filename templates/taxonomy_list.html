@@ -11,7 +11,7 @@
         <h2 class="card-title">
             <a href="{{ term.permalink }}">{{ term.name }}</a>
         </h2>
-        <p class="card-meta">{{ term.pages | length }} {{ i18n.taxonomy.posts }}</p>
+        <p class="card-meta">{{ term.pages | length }} {{ trans(key="posts", lang=lang) }}</p>
     </article>
     {% endfor %}
 </div>
