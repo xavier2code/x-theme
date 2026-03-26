@@ -1,5 +1,61 @@
 name = "x-theme"
-description = "A 90s print aesthetic blog theme"
+description = "A 90s print aesthetic blog theme - Zola 0.22+"
 license = "MIT"
 homepage = "https://github.com/xavier2code/x-theme"
 min_version = "0.22"
+
+# ============================================
+# Theme Configuration Guide
+# ============================================
+# 
+# Add these to your site's config.toml [extra] section:
+#
+# [extra]
+# 
+# ---- Author Info ----
+# author_name = "Your Name"
+# author_nickname = "2"  # used in masthead title
+# author_subtitle = "FULL-STACK DEVELOPER · LOCATION · TOPICS"
+# author_quote = "Your quote here<br>Line break supported."
+# author_bio = "Your bio here. <strong>HTML</strong> supported."
+# 
+# ---- About Page ----
+# about_name = "Xavier"
+# about_nickname = "2"
+# about_role = "FULL-STACK DEVELOPER · WUHAN, CHINA"
+# about_img = "featured1.jpg"
+# about_est = "EST. 2024"
+# about_bio_1 = "Bio paragraph 1 with <strong>HTML</strong>."
+# about_bio_2 = "Bio paragraph 2."
+# about_bio_3 = "Bio paragraph 3."
+# about_want_collaborate = "Want to collaborate?"
+# about_open_to = "OPEN TO FREELANCE, OSS & INTERESTING PROJECTS"
+#
+# about_email = "hello@example.com"
+# about_github_url = "https://github.com/yourname"
+# about_blog_url = "yourname.github.io/blog"
+#
+# ---- Skills (TOML array of tables) ----
+# skills = [
+#   { name = "Frontend", desc = "React, Vue, TypeScript", level = 85 },
+#   { name = "Backend", desc = "Node.js, Python, Rust", level = 78 },
+#   { name = "AI / LLM", desc = "OpenAI API, Claude, RAG", level = 82 },
+#   { name = "DevOps", desc = "Docker, GitHub Actions, Nginx", level = 75 },
+#   { name = "Tools", desc = "Zola, Git, Vim, Figma", level = 90 },
+#   { name = "Design", desc = "90s Print Aesthetic, Grid Systems", level = 65 },
+# ]
+#
+# ---- Timeline (TOML array of tables) ----
+# timeline = [
+#   { year = "2024 — NOW", title = "Current Role", desc = "Description." },
+#   { year = "2022 — 2024", title = "Previous Role", desc = "Description." },
+# ]
+#
+# ---- Marquee Text ----
+# marquee_text = "Your custom marquee text"
+# marquee_home = "Homepage specific marquee"
+# marquee_about = "About page marquee"
+# marquee_archive = "Archive page marquee"
+#
+# ---- GitHub Link ----
+# github_url = "https://github.com/yourname"
