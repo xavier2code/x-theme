@@ -55,27 +55,29 @@ zola check
 
 ```
 ├── templates/            # Tera HTML templates
-│   ├── base.html          # Base template
+│   ├── base.html          # Base template (all pages extend this)
+│   ├── index.html         # Homepage (alternative to home.html)
 │   ├── home.html          # Homepage
 │   ├── list.html          # Archive/list page
 │   ├── page.html          # Single post + static pages
-│   └── ...
+│   ├── section.html       # Section index
+│   ├── taxonomy_*.html    # Taxonomy templates
+│   └── 404.html           # Error page
 ├── sass/                 # Sass stylesheets
 │   ├── main.scss          # Entry point
 │   ├── _variables.scss    # Design tokens, colors, typography
 │   ├── _base.scss         # Reset, typography, body
-│   ├── _components.scss   # Navigation, cards, buttons, search
+│   ├── _components.scss   # Navigation, cards, buttons
 │   ├── _layout.scss       # Page layouts
-│   ├── _content.scss      # Gallery, portfolio, features, stats
-│   ├── _interactive.scss # Accordion, tabs, modal, tooltip
-│   ├── _enhanced.scss     # Columns, blockquote, alerts
-│   └── ...
-├── static/js/            # JavaScript modules
-│   ├── search.js         # Search functionality
-│   ├── accordion.js       # Accordion component
-│   ├── tabs.js           # Tab component
-│   ├── modal.js          # Modal component
-│   └── tooltip.js        # Tooltip component
+│   └── _marquee.scss      # Marquee animation
+├── static/               # Static assets
+│   ├── hero.jpg          # Homepage hero image
+│   ├── avatar.jpg         # Author avatar
+│   ├── featured*.jpg      # About page images
+│   └── js/               # JavaScript
+├── i18n/                 # Internationalization
+│   ├── en.toml           # English translations
+│   └── zh.toml           # Chinese translations
 └── theme.toml            # Theme configuration
 ```
 
@@ -539,23 +541,73 @@ Category badges and tags.
 
 ## Configuration
 
-See [docs/configuration.md](./docs/configuration.md) for full configuration guide including:
+See [docs/configuration.md](./docs/configuration.md) for full configuration guide.
 
-- Theme setup and taxonomies
-- All `extra` settings (`marquee_text`, `github_url`, `archive_posts_count`, etc.)
-- Static asset overrides
-- Content structure and front matter
+### Quick Configuration
 
-### Author Customization
-
-Configure author info via `zola.toml`:
+Add to your `zola.toml`:
 
 ```toml
+theme = "x-theme"
+compile_sass = true
+
+[taxonomies]
+categories = ["AI", "Terminal", "Zola", "Tools"]
+tags = ["AI", "Tools", "Tutorial"]
+
 [extra]
-author_subtitle = "FULL-STACK DEVELOPER · LOCATION"
-author_quote = "Your quote here."
-author_bio = "Your bio here."
-brand = "Your Brand"
+# Author Info
+author_name = "Your Name"
+author_nickname = "2"
+author_subtitle = "FULL-STACK DEVELOPER · LOCATION · TOPICS"
+author_quote = "Your quote here.<br>Line break supported."
+author_bio = "Your bio here. <strong>HTML</strong> supported."
+
+# About Page
+about_name = "Your Name"
+about_nickname = "2"
+about_role = "FULL-STACK DEVELOPER · LOCATION"
+about_img = "featured1.jpg"
+about_est = "EST. 2024"
+about_bio_1 = "Bio paragraph 1."
+about_bio_2 = "Bio paragraph 2."
+about_bio_3 = "Bio paragraph 3."
+
+# Social Links
+github_url = "https://github.com/username"
+about_email = "hello@example.com"
+about_blog_url = "yourname.github.io/blog"
+
+# Skills (TOML array of tables)
+[[extra.skills]]
+name = "Frontend"
+desc = "React, Vue, TypeScript"
+level = 85
+
+[[extra.skills]]
+name = "Backend"
+desc = "Node.js, Python, Rust"
+level = 78
+
+# Timeline (TOML array of tables)
+[[extra.timeline]]
+year = "2024 — NOW"
+title = "Current Role"
+desc = "Description."
+
+[[extra.timeline]]
+year = "2022 — 2024"
+title = "Previous Role"
+desc = "Description."
+
+# Marquee
+marquee_text = "Your marquee text"
+marquee_home = "Homepage marquee"
+marquee_about = "About page marquee"
+marquee_archive = "Archive marquee"
+
+# Archive
+archive_posts_count = 4
 ```
 
 ---
