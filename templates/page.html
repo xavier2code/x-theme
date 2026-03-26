@@ -1,29 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% if page.path is containing("about") %}
-<!-- ABOUT PAGE - kept separate -->
-
-{% else %}
-<!-- REGULAR POST PAGE -->
-{% endif %}
+{% set min_read_label = i18n.about.min_read | default(value="min read") %}
 
 {% if page.path is containing("about") %}
 <!-- ABOUT HERO -->
 <div class="section-wrap">
     <div class="about-hero reveal">
         <div class="about-hero__img-wrap">
-            <img src="{{ get_url(path="featured1.jpg") }}" alt="Portrait" class="about-hero__img">
-            <div class="about-hero__img-stamp">EST. 2024</div>
+            <img src="{{ get_url(path=config.extra.about_img | default(value="featured1.jpg")) }}" alt="Portrait" class="about-hero__img">
+            <div class="about-hero__img-stamp">{{ config.extra.about_est | default(value="EST. 2024") }}</div>
         </div>
         <div>
-            <div class="about-hero__label">// WHO IS THIS PERSON</div>
-            <h1 class="about-hero__name">Xavier<br><em>2</em>code</h1>
-            <p class="about-hero__role">FULL-STACK DEVELOPER · WUHAN, CHINA</p>
+            <div class="about-hero__label">// {{ i18n.about.who_is_this }}</div>
+            <h1 class="about-hero__name">{{ config.extra.about_name | default(value="Xavier") }}<br><em>{{ config.extra.about_nickname | default(value="2") }}code</em></h1>
+            <p class="about-hero__role">{{ config.extra.about_role | default(value="FULL-STACK DEVELOPER · LOCATION") }}</p>
             <div class="about-hero__bio">
-                <p>我是 <strong>xavier2code</strong>，一个在代码和文字之间来回横跳的独立开发者。白天写工程代码，晚上写技术博客，偶尔折腾设计和排版。</p>
-                <p>这个 blog 用 <strong>Zola</strong> 搭建，部署在 <strong>GitHub Pages</strong>，跑在 <strong>OpenClaw</strong> 上——是的，连 blog 的更新都是 AI 在自动完成的。</p>
-                <p>关注领域：<strong>AI 大模型，开源工具、全栈开发</strong>。业余时间研究 90 年代平面设计和复古排版美学。</p>
+                <p>{{ config.extra.about_bio_1 | default(value="我是独立开发者。") | safe }}</p>
+                <p>{{ config.extra.about_bio_2 | default(value="这个 blog 用 Zola 搭建。") | safe }}</p>
+                <p>{{ config.extra.about_bio_3 | default(value="关注领域：AI 大模型，开源工具。") | safe }}</p>
             </div>
         </div>
     </div>
@@ -32,106 +27,76 @@
 <!-- SKILLS -->
 <div class="section-wrap reveal">
     <div class="section-num">01</div>
-    <h2 class="section-title">Stack &amp; Skills</h2>
+    <h2 class="section-title">{{ i18n.about.stack_skills }}</h2>
     <div class="section-rule"></div>
     <div class="skills-grid">
+        {% for skill in config.extra.skills | default(value=[]) %}
         <div class="skill-card">
-            <div class="skill-card__name"><span class="skill-card__dot"></span>Frontend</div>
-            <div class="skill-card__desc">React, Vue, TypeScript, TailwindCSS, CSS Art</div>
-            <div class="skill-card__bar"><div class="skill-card__fill" style="width:85%"></div></div>
+            <div class="skill-card__name"><span class="skill-card__dot"></span>{{ skill.name }}</div>
+            <div class="skill-card__desc">{{ skill.desc }}</div>
+            <div class="skill-card__bar"><div class="skill-card__fill" style="width:{{ skill.level }}%"></div></div>
         </div>
-        <div class="skill-card">
-            <div class="skill-card__name"><span class="skill-card__dot"></span>Backend</div>
-            <div class="skill-card__desc">Node.js, Python, Rust, Go, PostgreSQL</div>
-            <div class="skill-card__bar"><div class="skill-card__fill" style="width:78%"></div></div>
-        </div>
-        <div class="skill-card">
-            <div class="skill-card__name"><span class="skill-card__dot"></span>AI / LLM</div>
-            <div class="skill-card__desc">OpenAI API, Claude, RAG, LangChain, Ollama</div>
-            <div class="skill-card__bar"><div class="skill-card__fill" style="width:82%"></div></div>
-        </div>
-        <div class="skill-card">
-            <div class="skill-card__name"><span class="skill-card__dot"></span>DevOps</div>
-            <div class="skill-card__desc">Docker, GitHub Actions, Nginx, Linux, Shell</div>
-            <div class="skill-card__bar"><div class="skill-card__fill" style="width:75%"></div></div>
-        </div>
-        <div class="skill-card">
-            <div class="skill-card__name"><span class="skill-card__dot"></span>Tools</div>
-            <div class="skill-card__desc">Zola, Git, Vim, Figma, Obsidian</div>
-            <div class="skill-card__bar"><div class="skill-card__fill" style="width:90%"></div></div>
-        </div>
-        <div class="skill-card">
-            <div class="skill-card__name"><span class="skill-card__dot"></span>Design</div>
-            <div class="skill-card__desc">90s Print Aesthetic, Grid Systems, Typography</div>
-            <div class="skill-card__bar"><div class="skill-card__fill" style="width:65%"></div></div>
-        </div>
+        {% endfor %}
     </div>
 </div>
 
 <!-- TIMELINE -->
 <div class="section-wrap reveal">
     <div class="section-num">02</div>
-    <h2 class="section-title">Timeline</h2>
+    <h2 class="section-title">{{ i18n.about.timeline }}</h2>
     <div class="section-rule"></div>
     <div class="timeline">
+        {% for item in config.extra.timeline | default(value=[]) %}
         <div class="timeline-item">
-            <div class="timeline-item__year">2026 — NOW</div>
-            <div class="timeline-item__title">Independent AI Developer</div>
-            <div class="timeline-item__desc">全职独立开发，运营个人 blog、构建 AI 原型项目，研究 AI + 出版/内容的交叉领域。</div>
+            <div class="timeline-item__year">{{ item.year }}</div>
+            <div class="timeline-item__title">{{ item.title }}</div>
+            <div class="timeline-item__desc">{{ item.desc }}</div>
         </div>
-        <div class="timeline-item">
-            <div class="timeline-item__year">2024 — 2026</div>
-            <div class="timeline-item__title">Senior Full-Stack Engineer · Remote</div>
-            <div class="timeline-item__desc">参与多个 SaaS 产品的后端架构和 AI 功能集成，主导从零搭建 RAG 系统和 AI Agent 产品。</div>
-        </div>
-        <div class="timeline-item">
-            <div class="timeline-item__year">2022 — 2024</div>
-            <div class="timeline-item__title">Frontend Engineer · Wuhan</div>
-            <div class="timeline-item__desc">专注 React 生态和可视化开发，服务于金融和数据可视化类产品。</div>
-        </div>
-        <div class="timeline-item">
-            <div class="timeline-item__year">2019 — 2022</div>
-            <div class="timeline-item__title">CS Degree · University</div>
-            <div class="timeline-item__desc">计算机科学本科，开始折腾个人博客和开源项目。</div>
-        </div>
+        {% endfor %}
     </div>
 </div>
 
 <!-- LINKS -->
 <div class="section-wrap reveal">
     <div class="section-num">03</div>
-    <h2 class="section-title">Find Me</h2>
+    <h2 class="section-title">{{ i18n.about.find_me }}</h2>
     <div class="section-rule"></div>
     <div class="links-grid">
-        <a href="https://github.com/xavier2code" class="link-card" target="_blank" rel="noopener">
+        {% if config.extra.github_url %}
+        <a href="{{ config.extra.github_url }}" class="link-card" target="_blank" rel="noopener">
             <div class="link-card__icon">⚡</div>
             <div>
                 <div class="link-card__label">GitHub</div>
-                <div class="link-card__desc">@xavier2code</div>
+                <div class="link-card__desc">{{ config.extra.github_url | replace(from="https://github.com/", to="@") }}</div>
             </div>
         </a>
+        {% endif %}
+        {% if config.extra.blog_url %}
         <a href="{{ get_url(path="/") }}" class="link-card" target="_blank" rel="noopener">
             <div class="link-card__icon">✎</div>
             <div>
                 <div class="link-card__label">Blog</div>
-                <div class="link-card__desc">xavier2code.github.io/blog</div>
+                <div class="link-card__desc">{{ config.extra.blog_url }}</div>
             </div>
         </a>
-        <a href="mailto:xavier@example.com" class="link-card">
+        {% endif %}
+        {% if config.extra.email %}
+        <a href="mailto:{{ config.extra.email }}" class="link-card">
             <div class="link-card__icon">◎</div>
             <div>
                 <div class="link-card__label">Email</div>
-                <div class="link-card__desc">xavier@example.com</div>
+                <div class="link-card__desc">{{ config.extra.email }}</div>
             </div>
         </a>
+        {% endif %}
     </div>
 </div>
 
 <!-- CTA -->
 <div class="cta-strip">
-    <h2>Want to collaborate?</h2>
-    <p>// OPEN TO FREELANCE, OSS &amp; INTERESTING PROJECTS</p>
-    <a href="mailto:xavier@example.com" class="btn-system">GET IN TOUCH →</a>
+    <h2>{{ i18n.about.want_to_collaborate }}</h2>
+    <p>// {{ i18n.about.open_to_projects }}</p>
+    <a href="mailto:{{ config.extra.email | default(value="hello@example.com") }}" class="btn-system">{{ i18n.about.get_in_touch }}</a>
 </div>
 
 {% else %}
@@ -150,7 +115,7 @@
     <div class="post-header__meta">
         <span>{{ page.date | date(format="%Y-%m-%d") }}</span>
         {% if page.extra.read_time %}
-        <span>{{ page.extra.read_time }} min read</span>
+        <span>{{ page.extra.read_time }} {{ min_read_label }}</span>
         {% endif %}
         {% if page.taxonomies.tags %}
         {% for tag in page.taxonomies.tags %}
