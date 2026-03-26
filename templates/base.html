@@ -20,13 +20,34 @@
     {% set i18n = load_data(path="themes/x-theme/i18n/" ~ lang ~ ".toml") %}
     
     {% block marquee %}
-    {% if config.extra.marquee_text %}
+    {% if current_path == "/" %}
+        {% if config.extra.marquee_home %}
+            {% set marquee_content = config.extra.marquee_home %}
+        {% else %}
+            {% set marquee_content = config.extra.marquee_text %}
+        {% endif %}
+    {% elif current_path == "/about" %}
+        {% if config.extra.marquee_about %}
+            {% set marquee_content = config.extra.marquee_about %}
+        {% else %}
+            {% set marquee_content = config.extra.marquee_text %}
+        {% endif %}
+    {% elif current_path is starting_with("/archives") %}
+        {% if config.extra.marquee_archive %}
+            {% set marquee_content = config.extra.marquee_archive %}
+        {% else %}
+            {% set marquee_content = config.extra.marquee_text %}
+        {% endif %}
+    {% else %}
+        {% set marquee_content = config.extra.marquee_text %}
+    {% endif %}
+    {% if marquee_content %}
     <div class="marquee-wrap">
         <div class="marquee-track">
             <span>×</span>
-            {{ config.extra.marquee_text }}
+            {{ marquee_content }}
             <span>×</span>
-            {{ config.extra.marquee_text }}
+            {{ marquee_content }}
             <span>×</span>
         </div>
     </div>

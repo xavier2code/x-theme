@@ -19,6 +19,9 @@ The `extra` section in `zola.toml` configures theme-specific options:
 [extra]
 # Marquee ticker text (optional)
 marquee_text = "★ WELCOME TO MY BLOG ★"
+marquee_home = "★ LATEST POSTS ★"      # Homepage marquee (overrides marquee_text)
+marquee_about = "★ ABOUT ME ★"         # About page marquee
+marquee_archive = "★ ALL POSTS ★"      # Archive page marquee
 
 # Social links (optional)
 github_url = "https://github.com/username"
@@ -32,10 +35,22 @@ archive_posts_count = 4
 
 | Key | Default | Description |
 |-----|---------|-------------|
-| `marquee_text` | - | Text displayed in the marquee ticker at the top of pages |
+| `marquee_text` | - | Default marquee text (fallback for all pages) |
+| `marquee_home` | `marquee_text` | Homepage marquee text |
+| `marquee_about` | `marquee_text` | About page marquee text |
+| `marquee_archive` | `marquee_text` | Archive page marquee text |
 | `github_url` | - | GitHub profile URL, shown in footer and about page |
 | `twitter_url` | - | Twitter/X profile URL, shown in footer |
 | `archive_posts_count` | `4` | Number of recent posts to display on the archive page |
+
+### Marquee Configuration
+
+The marquee ticker at the top of pages can be customized per page:
+
+- **`marquee_text`** - Default text used on all pages unless overridden
+- **`marquee_home`** - Homepage-specific marquee (if not set, uses `marquee_text`)
+- **`marquee_about`** - About page-specific marquee (if not set, uses `marquee_text`)
+- **`marquee_archive`** - Archive page-specific marquee (if not set, uses `marquee_text`)
 
 ## Taxonomies
 
