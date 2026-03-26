@@ -1,10 +1,7 @@
 (function() {
-    const LUNR_CDN = 'https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js';
-    const SEARCH_INDEX_URL = '/search_index.en.js';
     const STORE_URL = '/search_index.json';
     const DEBOUNCE_MS = 150;
 
-    let searchIndex = null;
     let searchStore = null;
     let searchBox = null;
     let resultsDropdown = null;
@@ -12,56 +9,24 @@
     let activeIndex = -1;
     let resultLinks = [];
 
-    async function loadLunr() {
-        if (window.lunr) return;
-        return new Promise((resolve, reject) => {
-            const script = document.createElement('script');
-            script.src = LUNR_CDN;
-            script.onload = resolve;
-            script.onerror = reject;
-            document.head.appendChild(script);
-        });
-    }
-
-    async function loadSearchIndex() {
-        try {
-            const response = await fetch(SEARCH_INDEX_URL);
-            if (!response.ok) {
-                console.warn('Search index not found');
-                return null;
-            }
-            const text = await response.text();
-            eval(text);
-            return window.searchIndex || null;
-        } catch (e) {
-            console.warn('Failed to load search index:', e);
-            return null;
-        }
-    }
-
     async function loadStore() {
         try {
             const response = await fetch(STORE_URL);
             if (!response.ok) {
                 console.warn('Search store not found');
-                return {};
+                return [];
             }
             const data = await response.json();
 
-            const store = {};
             if (data.store) {
-                data.store.forEach(item => {
-                    store[item.id] = item;
-                });
+                return data.store;
             } else if (data.posts) {
-                data.posts.forEach(item => {
-                    store[item.permalink] = item;
-                });
+                return data.posts;
             }
-            return store;
+            return [];
         } catch (e) {
             console.warn('Failed to load store:', e);
-            return {};
+            return [];
         }
     }
 
@@ -86,6 +51,30 @@
         return excerpt;
     }
 
+    function simpleSearch(store, query) {
+        const q = query.toLowerCase();
+        const results = [];
+
+        for (let i = 0; i < store.length; i++) {
+            const item = store[i];
+            const titleLower = (item.title || '').toLowerCase();
+            const descLower = (item.description || '').toLowerCase();
+            const contentLower = (item.content || '').toLowerCase();
+
+            let score = 0;
+            if (titleLower.includes(q)) score += 10;
+            if (descLower.includes(q)) score += 5;
+            if (contentLower.includes(q)) score += 1;
+
+            if (score > 0) {
+                results.push({ item, score });
+            }
+        }
+
+        results.sort((a, b) => b.score - a.score);
+        return results.map(r => r.item);
+    }
+
     function renderResults(query) {
         if (!query.trim()) {
             resultsDropdown.innerHTML = '';
@@ -93,15 +82,13 @@
             return;
         }
 
-        let results = [];
-        try {
-            results = searchIndex.search(query);
-        } catch (e) {
-            console.warn('Search error:', e);
-            resultsDropdown.innerHTML = '<div class="search-no-results">Search error</div>';
+        if (!searchStore || searchStore.length === 0) {
+            resultsDropdown.innerHTML = '<div class="search-no-results">Search not ready</div>';
             resultsDropdown.classList.add('show');
             return;
         }
+
+        const results = simpleSearch(searchStore, query);
 
         if (results.length === 0) {
             resultsDropdown.innerHTML = '<div class="search-no-results">No results found</div>';
@@ -109,17 +96,7 @@
             return;
         }
 
-        const uniqueResults = results.slice(0, 8).map(r => {
-            return searchStore[r.ref] || null;
-        }).filter(Boolean);
-
-        if (uniqueResults.length === 0) {
-            resultsDropdown.innerHTML = '<div class="search-no-results">No results found</div>';
-            resultsDropdown.classList.add('show');
-            return;
-        }
-
-        resultsDropdown.innerHTML = uniqueResults.map(item => `
+        resultsDropdown.innerHTML = results.slice(0, 8).map(item => `
             <a href="${escapeHtml(item.url || item.permalink)}" class="search-result">
                 <div class="search-result-title">${escapeHtml(item.title)}</div>
                 ${item.description ? `<div class="search-result-excerpt">${escapeHtml(getExcerpt(item.description, query))}</div>` : ''}
@@ -178,14 +155,11 @@
     }
 
     async function init() {
-        await loadLunr();
-
-        const idx = await loadSearchIndex();
-        if (!idx) return;
-        searchIndex = idx;
-
         searchStore = await loadStore();
-        if (Object.keys(searchStore).length === 0) return;
+        if (searchStore.length === 0) {
+            console.warn('No search data loaded');
+            return;
+        }
 
         searchBox = document.querySelector('.search-input');
         resultsDropdown = document.querySelector('.search-results');
