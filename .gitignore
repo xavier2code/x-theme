@@ -1,5 +1,6 @@
 .worktrees/
 .superpowers/
+docs/superpowers/
 
 # Theme only - exclude sample content
 content/
