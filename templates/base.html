@@ -43,6 +43,10 @@
                 <a href="/en{{ current_path }}" class="lang-btn">EN</a>
                 {% endif %}
             </div>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search..." aria-label="Search">
+                <div class="search-results"></div>
+            </div>
         </div>
     </nav>
 
@@ -84,5 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+<script src="{{ get_url(path="js/search.js") }}"></script>
 </body>
 </html>
