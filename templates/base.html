@@ -13,8 +13,11 @@
     <link rel="stylesheet" href="{{ get_url(path="main.css") }}">
 </head>
 <body>
-    {% set lang = current_path | truncate(l=3, end="") | trim(start="/") %}
-    {% if lang != "en" %}{% set_global lang = "zh" %}{% endif %}
+    {% if current_path is starting_with("/en") %}
+        {% set lang = "en" %}
+    {% else %}
+        {% set lang = "zh" %}
+    {% endif %}
     {% set i18n = load_data(path="themes/x-theme/i18n/" ~ lang ~ ".toml") %}
     
     <!-- Navigation -->
@@ -32,13 +35,17 @@
                 <a href="{{ get_url(path="categories") }}" class="nav-link {% if current_path is starting_with("/categories") %}active{% endif %}">{{ i18n.nav.categories }}</a>
                 <a href="{{ get_url(path="about") }}" class="nav-link {% if current_path == "/about" %}active{% endif %}">{{ i18n.nav.about }}</a>
                 <a href="{{ get_url(path="contact") }}" class="nav-link {% if current_path == "/contact" %}active{% endif %}">{{ i18n.nav.contact }}</a>
-                <div class="lang-switcher">
-                    {% if lang == "zh" %}
-                    <a href="/en{{ current_path }}" class="lang-btn">EN</a>
-                    {% else %}
-                    <a href="{{ current_path | replace(from="/en", to="") }}" class="lang-btn">中文</a>
-                    {% endif %}
-                </div>
+            </div>
+            <div class="lang-switcher">
+                {% if current_path is starting_with("/en") %}
+                <a href="{{ current_path | replace(from="/en", to="") }}" class="lang-btn">中文</a>
+                {% else %}
+                <a href="/en{{ current_path }}" class="lang-btn">EN</a>
+                {% endif %}
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="{{ i18n.search.placeholder }}" aria-label="{{ i18n.search.placeholder }}">
+                <div class="search-results"></div>
             </div>
         </div>
     </nav>
@@ -87,5 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+<script src="{{ get_url(path="js/search.js") }}"></script>
+<script>window.SEARCH_BASE = "{{ get_url(path="/") }}";</script>
 </body>
 </html>

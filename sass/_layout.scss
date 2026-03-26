@@ -34,6 +34,21 @@
         margin-bottom: $spacing-md;
         object-fit: cover;
     }
+    
+    .card-title {
+        position: relative;
+        display: inline-block;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: $accent-color;
+        }
+    }
 }
 
 .sidebar-posts {
@@ -134,6 +149,15 @@
     padding: $spacing-sm 0;
     border-bottom: 1px dashed rgba($border-color, 0.3);
 
+    .timeline-cover {
+        width: 80px;
+        height: 60px;
+        object-fit: cover;
+        border: 2px solid $border-color;
+        box-shadow: $shadow-sm;
+        flex-shrink: 0;
+    }
+
     .timeline-date {
         font-family: $font-heading;
         font-weight: 700;
@@ -170,12 +194,33 @@
         margin-bottom: $spacing-xl;
         position: relative;
         
+        .post-cover {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border: $border;
+            box-shadow: $shadow-md;
+            margin-bottom: $spacing-lg;
+        }
+        
         .badge {
             margin-bottom: $spacing-sm;
         }
         
         h1 {
             margin-bottom: $spacing-sm;
+            position: relative;
+            display: inline-block;
+            
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -8px;
+                left: 0;
+                width: 60px;
+                height: 4px;
+                background: $accent-color;
+            }
         }
     }
     

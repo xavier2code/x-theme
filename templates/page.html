@@ -3,6 +3,9 @@
 {% block content %}
 <article class="post-layout">
     <header class="post-header">
+        {% if page.extra.cover %}
+        <img src="{{ get_url(path=page.extra.cover) }}" class="post-cover" alt="{{ page.title }}">
+        {% endif %}
         {% if page.taxonomies.categories %}
         <span class="badge">{{ page.taxonomies.categories[0] }}</span>
         {% endif %}
@@ -10,7 +13,7 @@
         <div class="post-meta">
             <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
             {% if page.taxonomies.tags %}
-            • Tags: {% for tag in page.taxonomies.tags %}{{ tag }}{% if not loop.last %}, {% endif %}{% endfor %}
+            • {{ i18n.nav.tags }}: {% for tag in page.taxonomies.tags %}{{ tag }}{% if not loop.last %}, {% endif %}{% endfor %}
             {% endif %}
         </div>
     </header>

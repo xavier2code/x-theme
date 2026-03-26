@@ -40,11 +40,12 @@ p {
 }
 
 a {
-    color: $primary-color;
+    color: $text-color;
     text-decoration: none;
     
     &:hover {
-        text-decoration: underline;
+        color: $accent-color;
+        text-decoration: none;
     }
 }
 
