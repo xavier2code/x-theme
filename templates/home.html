@@ -30,7 +30,7 @@
         </div>
         <div class="stat-item">
             <span class="stat-number">90s</span>
-            <span class="stat-label">{{ i18n.home.design_style | default(value="Design") }}</span>
+            <span class="stat-label">{{ i18n.homepage.design_style | default(value="Design") }}</span>
         </div>
     </div>
 </div>
@@ -64,7 +64,7 @@
                 <h3 class="post-card__title">{{ latest.title }}</h3>
                 <p class="post-card__date">{{ latest.date | date(format="%Y-%m-%d") }}</p>
                 <p class="post-card__excerpt">{{ latest.description }}</p>
-                <a href="{{ latest.permalink }}" class="post-card__link">READ →</a>
+                <a href="{{ latest.permalink }}" class="post-card__link">{{ i18n.about.read | default(value="READ →") }}</a>
             </article>
         </div>
 
@@ -78,7 +78,7 @@
                 <h3 class="post-card__title">{{ page.title }}</h3>
                 <p class="post-card__date">{{ page.date | date(format="%Y-%m-%d") }}</p>
                 <p class="post-card__excerpt">{{ page.description }}</p>
-                <a href="{{ page.permalink }}" class="post-card__link">READ →</a>
+                <a href="{{ page.permalink }}" class="post-card__link">{{ i18n.about.read | default(value="READ →") }}</a>
             </article>
         </div>
         {% endfor %}
@@ -102,7 +102,7 @@
             <p class="about-bio">
                 {{ config.extra.author_bio | default(value="Full-stack developer and independent technical writer.") }}
             </p>
-            <a href="{{ get_url(path="about") }}" class="post-card__link">{{ i18n.home.more_about | default(value="MORE ABOUT") }} →</a>
+            <a href="{{ get_url(path="about") }}" class="post-card__link">{{ i18n.about.more_about }}</a>
         </div>
     </div>
 </div>
@@ -132,7 +132,7 @@
 <div class="cta-strip reveal">
     <h2>{{ i18n.home.cta_title }}</h2>
     <p>// {{ i18n.home.cta_subtitle }}</p>
-    <a href="{{ get_url(path="archives") }}" class="btn-system">{{ i18n.home.view_all_posts }} →</a>
+    <a href="{{ get_url(path="archives") }}" class="btn-system">{{ i18n.about.view_all }}</a>
 </div>
 
 {% endif %}
