@@ -539,68 +539,12 @@ Category badges and tags.
 
 ## Configuration
 
-Edit your site's `zola.toml`:
+See [docs/configuration.md](./docs/configuration.md) for full configuration guide including:
 
-```toml
-base_url = "https://example.com"
-title = "My Blog"
-theme = "x-theme"
-compile_sass = true
-
-taxonomies = [
-    { name = "categories", feed = true },
-    { name = "tags", feed = true }
-]
-
-[extra]
-marquee_text = "★ WELCOME TO MY BLOG ★"
-github_url = "https://github.com/username"
-twitter_url = "https://twitter.com/username"
-archive_posts_count = 4
-```
-
-| Extra Key | Default | Description |
-|-----------|---------|-------------|
-| `marquee_text` | - | Text displayed in the marquee ticker |
-| `github_url` | - | GitHub profile URL |
-| `twitter_url` | - | Twitter profile URL |
-| `archive_posts_count` | `4` | Number of posts to show on archive page |
-
-## Customization
-
-### Static Assets Override
-
-Zola uses a **priority cascade** for static files:
-- `your-site/static/` (highest priority)
-- `themes/x-theme/static/`
-
-Place a file with the **same name** in your site's `static/` directory to override the theme default.
-
-#### Default Theme Images
-
-The theme provides these default images in `themes/x-theme/static/`:
-
-| File | Usage |
-|------|-------|
-| `avatar.jpg` | Author avatar |
-| `hero.jpg` | Homepage hero image |
-| `featured1.jpg` | Featured post image 1 |
-| `featured2.jpg` | Featured post image 2 |
-| `featured3.jpg` | Featured post image 3 |
-
-#### Override Example
-
-To use your own avatar:
-
-```bash
-# 1. Place your image in your site's static directory
-cp /path/to/your-avatar.png your-site/static/avatar.jpg
-
-# 2. Build - Zola will use your-site/static/avatar.jpg instead of the theme default
-zola build
-```
-
-Your site's `static/images/` directory (for post-specific images) is **not affected** - it remains separate and is never overridden by the theme.
+- Theme setup and taxonomies
+- All `extra` settings (`marquee_text`, `github_url`, `archive_posts_count`, etc.)
+- Static asset overrides
+- Content structure and front matter
 
 ---
 

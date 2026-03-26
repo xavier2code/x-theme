@@ -1,9 +1,8 @@
 .worktrees/
 .superpowers/
 
-# Theme only - exclude sample content and docs
+# Theme only - exclude sample content
 content/
-docs/
 
 # Development files
 AGENTS.md
