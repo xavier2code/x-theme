@@ -15,3 +15,6 @@ posts = "posts"
 
 [taxonomy]
 posts = "posts"
+
+[search]
+placeholder = "Search..."
