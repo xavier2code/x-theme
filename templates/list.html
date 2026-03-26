@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% set min_read_label = i18n.about.min_read | default(value="min read") %}
+{% set uncategorized_label = i18n.about.uncategorized | default(value="Uncategorized") %}
 <div class="archive-header">
     <div class="archive-header__label">// {{ i18n.list.archive_label }}</div>
     <h1 class="archive-header__title">{{ i18n.list.every_word }}</h1>
@@ -8,11 +10,11 @@
 </div>
 
 <div class="filter-bar">
-    <button class="filter-btn active" data-filter="all">{{ i18n.list.all_posts }}</button>
-    <button class="filter-btn" data-filter="AI">AI</button>
-    <button class="filter-btn" data-filter="Terminal">Terminal</button>
-    <button class="filter-btn" data-filter="Zola">Zola</button>
-    <button class="filter-btn" data-filter="Tools">Tools</button>
+    <button class="filter-btn active" data-filter="all">{{ i18n.filter.all | default(value="All Posts") }}</button>
+    {% set taxonomies = get_taxonomies() %}
+    {% for term in taxonomies.categories %}
+    <button class="filter-btn" data-filter="{{ term.name }}">{{ term.name }}</button>
+    {% endfor %}
 </div>
 
 <div class="section-wrap">
@@ -35,13 +37,13 @@
         {{ i18n.list.showing_posts }} <strong>{{ current_month_pages | length }}</strong> {{ i18n.list.posts_in_month | upper }} {{ now() | date(format="%B %Y") | upper }}
     </div>
     {% for page in current_month_pages %}
-    <div class="post-item reveal" data-category="{% if page.taxonomies.categories %}{{ page.taxonomies.categories[0] }}{% else %}Uncategorized{% endif %}">
+    <div class="post-item reveal" data-category="{% if page.taxonomies.categories %}{{ page.taxonomies.categories[0] }}{% else %}{{ uncategorized_label }}{% endif %}">
         <span class="post-item__num">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
         <div>
             <div class="post-item__title">{{ page.title }}</div>
             <div class="post-item__meta">{{ page.date | date(format="%Y-%m-%d") }}</div>
         </div>
-        <div class="post-item__meta">{% if page.extra.read_time %}{{ page.extra.read_time }} min read{% endif %}</div>
+        <div class="post-item__meta">{% if page.extra.read_time %}{{ page.extra.read_time }} {{ min_read_label }}{% endif %}</div>
         {% if page.taxonomies.categories %}
         <span class="post-item__tag">{{ page.taxonomies.categories[0] }}</span>
         {% endif %}
@@ -54,13 +56,13 @@
     {% set earlier_start_index = current_month_pages | length %}
     {% for page in earlier_pages %}
     {% set item_index = earlier_start_index + loop.index %}
-    <div class="post-item reveal" data-category="{% if page.taxonomies.categories %}{{ page.taxonomies.categories[0] }}{% else %}Uncategorized{% endif %}">
+    <div class="post-item reveal" data-category="{% if page.taxonomies.categories %}{{ page.taxonomies.categories[0] }}{% else %}{{ uncategorized_label }}{% endif %}">
         <span class="post-item__num">{{ item_index }}</span>
         <div>
             <div class="post-item__title">{{ page.title }}</div>
             <div class="post-item__meta">{{ page.date | date(format="%Y-%m-%d") }}</div>
         </div>
-        <div class="post-item__meta">{% if page.extra.read_time %}{{ page.extra.read_time }} min read{% endif %}</div>
+        <div class="post-item__meta">{% if page.extra.read_time %}{{ page.extra.read_time }} {{ min_read_label }}{% endif %}</div>
         {% if page.taxonomies.categories %}
         <span class="post-item__tag">{{ page.taxonomies.categories[0] }}</span>
         {% endif %}
