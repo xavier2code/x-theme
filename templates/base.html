@@ -56,11 +56,11 @@
 
     <footer class="footer">
         <div class="footer-inner">
-            <span>© {{ now() | date(format="%Y") }} {{ config.title }} · Built with Zola</span>
+            <span>© {{ now() | date(format="%Y") }} {{ config.title }} · {{ i18n.footer.built_with | default(value="Built with Zola") }}</span>
             <div class="footer-links">
-                <a href="{{ get_url(path="/") }}">Home</a>
-                <a href="{{ get_url(path="about") }}">About</a>
-                <a href="{{ get_url(path="archives") }}">Archive</a>
+                <a href="{{ get_url(path="/") }}">{{ i18n.nav.home }}</a>
+                <a href="{{ get_url(path="about") }}">{{ i18n.nav.about }}</a>
+                <a href="{{ get_url(path="archives") }}">{{ i18n.nav.archive }}</a>
                 {% if config.extra.github_url %}
                 <a href="{{ config.extra.github_url }}" target="_blank" rel="noopener">GitHub</a>
                 {% endif %}
