@@ -202,7 +202,7 @@
     will-change: background-color, color, box-shadow, transform;
     
     &:hover {
-        background: $primary-color;
+        background: $accent-color;
         color: $white;
         box-shadow: $shadow-sm;
         text-decoration: none;
