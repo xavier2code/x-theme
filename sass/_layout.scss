@@ -34,6 +34,21 @@
         margin-bottom: $spacing-md;
         object-fit: cover;
     }
+    
+    .card-title {
+        position: relative;
+        display: inline-block;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: $accent-color;
+        }
+    }
 }
 
 .sidebar-posts {
@@ -188,6 +203,18 @@
         
         h1 {
             margin-bottom: $spacing-sm;
+            position: relative;
+            display: inline-block;
+            
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -8px;
+                left: 0;
+                width: 60px;
+                height: 4px;
+                background: $accent-color;
+            }
         }
     }
     

@@ -1,5 +1,5 @@
 (function() {
-    const STORE_URL = '/search_index.json';
+    const STORE_URL = (window.SEARCH_BASE || '') + 'search_index.json';
     const DEBOUNCE_MS = 150;
 
     let searchStore = null;
