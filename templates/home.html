@@ -3,11 +3,11 @@
 {% block content %}
 <!-- MASTHEAD -->
 <header class="masthead">
-    <div class="masthead__label">Personal Blog × {{ now() | date(format="%Y") }}</div>
+    <div class="masthead__label">{{ i18n.home.masthead_label }} × {{ now() | date(format="%Y") }}</div>
     <h1 class="masthead__title">
-        xavier<br><em>2</em>code
+        {{ config.title | split(pat=" ") | first }}<br><em>2</em>code
     </h1>
-    <p class="masthead__sub">// FULL-STACK DEVELOPER · WUHAN, CHINA · WRITING ABOUT AI, CODE &amp; DESIGN</p>
+    <p class="masthead__sub">// {{ config.extra.author_subtitle | default(value="FULL-STACK DEVELOPER · LOCATION") }}</p>
 </header>
 
 {% set hero_post = get_section(path="posts/_index.md") %}
@@ -18,19 +18,19 @@
     <div class="stats">
         <div class="stat-item">
             <span class="stat-number">{{ hero_post.pages | length }}</span>
-            <span class="stat-label">文章</span>
+            <span class="stat-label">{{ i18n.common.posts }}</span>
         </div>
         <div class="stat-item">
             <span class="stat-number">{{ taxonomies.categories | length }}</span>
-            <span class="stat-label">分类</span>
+            <span class="stat-label">{{ i18n.nav.categories }}</span>
         </div>
         <div class="stat-item">
             <span class="stat-number">{{ taxonomies.tags | length }}</span>
-            <span class="stat-label">标签</span>
+            <span class="stat-label">{{ i18n.nav.tags }}</span>
         </div>
         <div class="stat-item">
             <span class="stat-number">90s</span>
-            <span class="stat-label">设计风格</span>
+            <span class="stat-label">{{ i18n.home.design_style | default(value="Design") }}</span>
         </div>
     </div>
 </div>
@@ -50,7 +50,7 @@
 <!-- FEATURED POSTS -->
 <div class="section-wrap reveal">
     <div class="section-num">01</div>
-    <h2 class="section-title">Latest Posts</h2>
+    <h2 class="section-title">{{ i18n.home.latest_posts }}</h2>
     <div class="section-rule"></div>
 
     <div class="featured-grid">
@@ -90,21 +90,19 @@
 <!-- ABOUT -->
 <div class="section-wrap reveal">
     <div class="section-num">02</div>
-    <h2 class="section-title">About</h2>
+    <h2 class="section-title">{{ i18n.home.about }}</h2>
     <div class="section-rule"></div>
 
     <div class="about-split">
         <blockquote class="about-quote">
-            代码即表达。<br>AI是新的创意媒介。
+            {{ config.extra.author_quote | default(value="代码即表达。<br>AI是新的创意媒介。") }}
         </blockquote>
         <div class="about-right">
             <img src="{{ get_url(path="avatar.jpg") }}" alt="Avatar" class="about-avatar" loading="lazy">
             <p class="about-bio">
-                <strong>xavier2code</strong>，武汉，全栈开发者和独立技术写作者。
-                关注 <strong>AI、大模型、开源工具</strong>，偶尔折腾折腾设计与排版。
-                这个博客记录技术观察、工具使用和行业思考。
+                {{ config.extra.author_bio | default(value="Full-stack developer and independent technical writer.") }}
             </p>
-            <a href="{{ get_url(path="about") }}" class="post-card__link">MORE ABOUT →</a>
+            <a href="{{ get_url(path="about") }}" class="post-card__link">{{ i18n.home.more_about | default(value="MORE ABOUT") }} →</a>
         </div>
     </div>
 </div>
@@ -114,7 +112,7 @@
 <!-- ARCHIVE -->
 <div class="section-wrap reveal">
     <div class="section-num">03</div>
-    <h2 class="section-title">Archive</h2>
+    <h2 class="section-title">{{ i18n.home.archive }}</h2>
     <div class="section-rule"></div>
 
     <div class="post-list">
@@ -132,9 +130,9 @@
 
 <!-- CTA -->
 <div class="cta-strip reveal">
-    <h2>Stay in the loop.</h2>
-    <p>// NEW POSTS EVERY MORNING AT 09:00 BEIJING TIME</p>
-    <a href="{{ get_url(path="archives") }}" class="btn-system">VIEW ALL POSTS →</a>
+    <h2>{{ i18n.home.cta_title }}</h2>
+    <p>// {{ i18n.home.cta_subtitle }}</p>
+    <a href="{{ get_url(path="archives") }}" class="btn-system">{{ i18n.home.view_all_posts }} →</a>
 </div>
 
 {% endif %}

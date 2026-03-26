@@ -546,6 +546,18 @@ See [docs/configuration.md](./docs/configuration.md) for full configuration guid
 - Static asset overrides
 - Content structure and front matter
 
+### Author Customization
+
+Configure author info via `zola.toml`:
+
+```toml
+[extra]
+author_subtitle = "FULL-STACK DEVELOPER · LOCATION"
+author_quote = "Your quote here."
+author_bio = "Your bio here."
+brand = "Your Brand"
+```
+
 ---
 
 ## Content Format

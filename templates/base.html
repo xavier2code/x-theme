@@ -20,10 +20,10 @@
     {% set i18n = load_data(path="themes/x-theme/i18n/" ~ lang ~ ".toml") %}
     
     <nav class="topnav">
-        <a href="{{ get_url(path="/") }}" class="topnav__brand {% if current_path == "/" %}active{% endif %}">× X2C</a>
-        <a href="{{ get_url(path="/") }}" class="{% if current_path == "/" %}active{% endif %}">Home</a>
-        <a href="{{ get_url(path="about") }}" class="{% if current_path == "/about" %}active{% endif %}">About</a>
-        <a href="{{ get_url(path="archives") }}" class="{% if current_path is starting_with("/archives") %}active{% endif %}">Archive</a>
+        <a href="{{ get_url(path="/") }}" class="topnav__brand {% if current_path == "/" %}active{% endif %}">× {{ config.extra.brand | default(value=config.title) }}</a>
+        <a href="{{ get_url(path="/") }}" class="{% if current_path == "/" %}active{% endif %}">{{ i18n.nav.home }}</a>
+        <a href="{{ get_url(path="about") }}" class="{% if current_path == "/about" %}active{% endif %}">{{ i18n.nav.about }}</a>
+        <a href="{{ get_url(path="archives") }}" class="{% if current_path is starting_with("/archives") %}active{% endif %}">{{ i18n.nav.archive }}</a>
     </nav>
 
     {% block marquee %}

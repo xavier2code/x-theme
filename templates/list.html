@@ -2,13 +2,13 @@
 
 {% block content %}
 <div class="archive-header">
-    <div class="archive-header__label">// ARCHIVE — ALL POSTS</div>
-    <h1 class="archive-header__title">Every<br>Word.</h1>
-    <p class="archive-header__sub">{{ section.pages | length }} POSTS · {{ now() | date(format="%Y") }}</p>
+    <div class="archive-header__label">// {{ i18n.list.archive_label }}</div>
+    <h1 class="archive-header__title">{{ i18n.list.every_word }}</h1>
+    <p class="archive-header__sub">{{ section.pages | length }} {{ i18n.common.posts }} · {{ now() | date(format="%Y") }}</p>
 </div>
 
 <div class="filter-bar">
-    <button class="filter-btn active" data-filter="all">All Posts</button>
+    <button class="filter-btn active" data-filter="all">{{ i18n.list.all_posts }}</button>
     <button class="filter-btn" data-filter="AI">AI</button>
     <button class="filter-btn" data-filter="Terminal">Terminal</button>
     <button class="filter-btn" data-filter="Zola">Zola</button>

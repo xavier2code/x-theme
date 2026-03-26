@@ -18,3 +18,27 @@ posts = "篇文章"
 
 [search]
 placeholder = "搜索..."
+
+[home]
+masthead_label = "个人博客"
+latest_posts = "最新文章"
+about = "关于"
+archive = "归档"
+cta_title = "保持联系。"
+cta_subtitle = "每周都有新文章"
+view_all_posts = "查看所有文章"
+
+[list]
+archive_label = "归档 — 所有文章"
+every_word = "每一个<br>文字。"
+all_posts = "所有文章"
+
+[page]
+more_posts = "更多文章"
+
+[error]
+page_not_found_title = "404 — 页面未找到"
+system_error = "系统错误 — 页面未找到"
+lost_in_grid = "迷失<br><em>在网格中。</em>"
+error_message = "您查找的页面不存在、已被移动，<br>或者像90年代的屏幕保护程序一样跑掉了。"
+back_to_home = "← 返回首页"

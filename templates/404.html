@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ i18n.error.page_not_found_title }} — {{ config.title }}</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@400;500;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{ get_url(path="main.css") }}">
+</head>
+<body class="error-page">
+    {% if current_path is starting_with("/en") %}
+        {% set lang = "en" %}
+    {% else %}
+        {% set lang = "zh" %}
+    {% endif %}
+    {% set i18n = load_data(path="themes/x-theme/i18n/" ~ lang ~ ".toml") %}
+    
+    <div class="error-deco error-deco-tl"></div>
+    <div class="error-deco error-deco-tr"></div>
+    <div class="error-deco error-deco-bl"></div>
+    <div class="error-deco error-deco-br"></div>
+    
+    <div class="error-bg-text">404</div>
+    
+    <div class="error-content">
+        <div class="error-stamp">ERROR · 404</div>
+        <div class="error-code-label">// {{ i18n.error.system_error }}</div>
+        <h1 class="error-title">{{ i18n.error.lost_in_grid }}</h1>
+        <p class="error-message">
+            {{ i18n.error.error_message }}
+        </p>
+        <a href="{{ get_url(path="/") }}" class="btn-system">{{ i18n.error.back_to_home }}</a>
+    </div>
+    
+    <div class="error-marquee-wrap">
+        <div class="error-marquee-content">
+            <span>×</span> 404 · PAGE NOT FOUND <span>×</span>
+            THE PAGE YOU'RE LOOKING FOR DOESN'T EXIST <span>×</span>
+            404 · PAGE NOT FOUND <span>×</span>
+            THE PAGE YOU'RE LOOKING FOR DOESN'T EXIST <span>×</span>
+        </div>
+    </div>
+</body>
+</html>
+
+<style>
+.error-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Space Grotesk', sans-serif;
+}
+.error-deco {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    border: 3px solid #1A1A1A;
+}
+.error-deco-tl { top: 2rem; left: 2rem; border-right: none; border-bottom: none; }
+.error-deco-tr { top: 2rem; right: 2rem; border-left: none; border-bottom: none; }
+.error-deco-bl { bottom: 2rem; left: 2rem; border-right: none; border-top: none; }
+.error-deco-br { bottom: 2rem; right: 2rem; border-left: none; border-top: none; }
+.error-bg-text {
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(8rem, 25vw, 20rem);
+    font-weight: 900;
+    color: rgba(26, 26, 26, 0.04);
+    user-select: none;
+    z-index: 0;
+}
+.error-content {
+    text-align: center;
+    z-index: 1;
+    padding: 2rem;
+}
+.error-stamp {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: #E85D04;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    border: 2px solid #E85D04;
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+}
+.error-code-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.75rem;
+    color: #888;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+}
+.error-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 900;
+    line-height: 1;
+    color: #1A4B8C;
+    margin-bottom: 1.5rem;
+}
+.error-title em {
+    color: #E85D04;
+    font-style: italic;
+}
+.error-message {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+.btn-system {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    background: #1A1A1A;
+    color: #fff;
+    text-decoration: none;
+    border: 3px solid #1A1A1A;
+    box-shadow: 4px 4px 0 #E85D04;
+    transition: all 0.15s;
+}
+.btn-system:hover {
+    background: #E85D04;
+    border-color: #E85D04;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #1A1A1A;
+}
+.error-marquee-wrap {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #1A1A1A;
+    overflow: hidden;
+    padding: 0.8rem 0;
+}
+.error-marquee-content {
+    display: flex;
+    gap: 2rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    white-space: nowrap;
+    animation: marquee 20s linear infinite;
+}
+.error-marquee-content span {
+    color: #E85D04;
+}
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+</style>
