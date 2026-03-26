@@ -19,6 +19,13 @@
     {% endif %}
     {% set i18n = load_data(path="themes/x-theme/i18n/" ~ lang ~ ".toml") %}
     
+    <nav class="topnav">
+        <a href="{{ get_url(path="/") }}" class="topnav__brand {% if current_path == "/" %}active{% endif %}">× X2C</a>
+        <a href="{{ get_url(path="/") }}" class="{% if current_path == "/" %}active{% endif %}">Home</a>
+        <a href="{{ get_url(path="about") }}" class="{% if current_path == "/about" %}active{% endif %}">About</a>
+        <a href="{{ get_url(path="archives") }}" class="{% if current_path is starting_with("/archives") %}active{% endif %}">Archive</a>
+    </nav>
+
     {% block marquee %}
     {% set marquee_default = config.extra.marquee_text | default(value="") %}
     {% if current_path == "/" %}
@@ -42,13 +49,6 @@
     </div>
     {% endif %}
     {% endblock %}
-
-    <nav class="topnav">
-        <a href="{{ get_url(path="/") }}" class="topnav__brand {% if current_path == "/" %}active{% endif %}">× X2C</a>
-        <a href="{{ get_url(path="/") }}" class="{% if current_path == "/" %}active{% endif %}">Home</a>
-        <a href="{{ get_url(path="about") }}" class="{% if current_path == "/about" %}active{% endif %}">About</a>
-        <a href="{{ get_url(path="archives") }}" class="{% if current_path is starting_with("/archives") %}active{% endif %}">Archive</a>
-    </nav>
 
     <main class="main">
         {% block content %}{% endblock %}
