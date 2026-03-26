@@ -1,6 +1,6 @@
 // Navigation
 .nav {
-    background: $white;
+    background: $border-color;
     border-bottom: $border;
     position: sticky;
     top: 0;
@@ -77,8 +77,8 @@
     font-weight: 700;
     font-size: 0.875rem;
     padding: $spacing-sm $spacing-md;
-    color: $text-color;
-    border-right: $border;
+    color: $white;
+    border-right: 1px solid rgba(#fff, 0.2);
     display: block;
     transition: background-color $duration-fast $ease-smooth,
                 color $duration-fast $ease-smooth,
@@ -86,13 +86,13 @@
     will-change: background-color, color;
     
     &:hover {
-        background: $primary-color;
+        background: $accent-color;
         color: $white;
         text-decoration: none;
     }
     
     &.active {
-        background: $primary-color;
+        background: $accent-color;
         color: $white;
     }
     
@@ -161,7 +161,7 @@
     will-change: box-shadow, transform;
     
     &:hover {
-        box-shadow: $shadow-lg;
+        box-shadow: 8px 8px 0 $accent-color;
         transform: translate(-6px, -6px);
         z-index: 10;
     }
