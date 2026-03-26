@@ -20,9 +20,21 @@
         {% if config.extra.lang_switcher_enabled | default(value=false) %}
         <div class="lang-switcher">
             {% if lang == "zh" %}
-            <a href="{{ get_url(path=current_path, lang="en") }}" aria-label="{{ trans(key="switch_lang_label", lang="en") }}">EN</a>
+            {% set path_without_lang = current_path | trim_start_matches(pat="/") %}
+            {% if path_without_lang | length > 0 %}
+            <a href="{{ get_url(path=path_without_lang, lang="en") }}" aria-label="{{ trans(key="switch_lang_label", lang="en") }}">{{ trans(key="switch_to_en", lang="en") }}</a>
             {% else %}
-            <a href="{{ get_url(path=current_path, lang="zh") }}" aria-label="{{ trans(key="switch_lang_label", lang="zh") }}">中文</a>
+            <a href="{{ get_url(path="/", lang="en") }}" aria-label="{{ trans(key="switch_lang_label", lang="en") }}">{{ trans(key="switch_to_en", lang="en") }}</a>
+            {% endif %}
+            {% else %}
+            {% if current_path is starting_with("/en/") %}
+            {% set content_path = current_path | trim_start_matches(pat="/en/") %}
+            <a href="{{ get_url(path=content_path, lang="zh") }}" aria-label="{{ trans(key="switch_lang_label", lang="zh") }}">{{ trans(key="switch_to_zh", lang="zh") }}</a>
+            {% elif current_path == "/en" %}
+            <a href="{{ get_url(path="/", lang="zh") }}" aria-label="{{ trans(key="switch_lang_label", lang="zh") }}">{{ trans(key="switch_to_zh", lang="zh") }}</a>
+            {% else %}
+            <a href="{{ get_url(path="/", lang="zh") }}" aria-label="{{ trans(key="switch_lang_label", lang="zh") }}">{{ trans(key="switch_to_zh", lang="zh") }}</a>
+            {% endif %}
             {% endif %}
         </div>
         {% endif %}

@@ -16,9 +16,9 @@
             <h1 class="about-hero__name">{{ config.extra.about_name | default(value="Xavier") }}<br><em>{{ config.extra.about_nickname | default(value="2") }}code</em></h1>
             <p class="about-hero__role">{{ config.extra.about_role | default(value="FULL-STACK DEVELOPER · LOCATION") }}</p>
             <div class="about-hero__bio">
-                <p>{{ config.extra.about_bio_1 | default(value="我是独立开发者。") | safe }}</p>
-                <p>{{ config.extra.about_bio_2 | default(value="这个 blog 用 Zola 搭建。") | safe }}</p>
-                <p>{{ config.extra.about_bio_3 | default(value="关注领域：AI 大模型，开源工具。") | safe }}</p>
+                <p>{{ trans(key="about_bio_1", lang=lang) | safe }}</p>
+                <p>{{ trans(key="about_bio_2", lang=lang) | safe }}</p>
+                <p>{{ trans(key="about_bio_3", lang=lang) | safe }}</p>
             </div>
         </div>
     </div>

@@ -11,6 +11,17 @@
 
 <div class="filter-bar">
     <button class="filter-btn active" data-filter="all">{{ trans(key="all_posts", lang=lang) }}</button>
+    {% set all_categories = [] %}
+    {% for page in section.pages %}
+        {% if page.taxonomies.categories %}
+            {% for cat in page.taxonomies.categories %}
+                {% set_global all_categories = all_categories | concat(with=[cat]) %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+    {% for cat in all_categories | unique | sort %}
+    <button class="filter-btn" data-filter="{{ cat }}">{{ cat }}</button>
+    {% endfor %}
 </div>
 
 <div class="section-wrap">

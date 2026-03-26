@@ -111,12 +111,12 @@ window.__MARQUEE_DATA__ = [
 
     <div class="about-split">
         <blockquote class="about-quote">
-            {{ config.extra.author_quote | default(value="代码即表达。<br>AI是新的创意媒介。") }}
+            {{ trans(key="author_quote", lang=lang) }}
         </blockquote>
         <div class="about-right">
             <img src="{{ get_url(path="avatar.jpg") }}" alt="Avatar" class="about-avatar" loading="lazy">
             <p class="about-bio">
-            {{ config.extra.author_bio | default(value="Full-stack developer and independent technical writer.") }}
+            {{ trans(key="author_bio", lang=lang) }}
         </p>
             <a href="{{ get_url(path="about") }}" class="post-card__link">{{ trans(key="more_about", lang=lang) }}</a>
         </div>
