@@ -32,6 +32,9 @@ view_all_posts = "VIEW ALL POSTS"
 archive_label = "ARCHIVE — ALL POSTS"
 every_word = "Every<br>Word."
 all_posts = "All Posts"
+earlier = "Earlier"
+showing_posts = "SHOWING"
+posts_in_month = "POSTS IN"
 
 [page]
 more_posts = "More Posts"

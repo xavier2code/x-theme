@@ -32,6 +32,9 @@ view_all_posts = "查看所有文章"
 archive_label = "归档 — 所有文章"
 every_word = "每一个<br>文字。"
 all_posts = "所有文章"
+earlier = "更早"
+showing_posts = "显示"
+posts_in_month = "篇文章在"
 
 [page]
 more_posts = "更多文章"
