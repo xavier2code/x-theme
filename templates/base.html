@@ -26,7 +26,7 @@
         {% else %}
             {% set marquee_content = config.extra.marquee_text %}
         {% endif %}
-    {% elif current_path == "/about" %}
+    {% elif current_path is starting_with("/about") %}
         {% if config.extra.marquee_about %}
             {% set marquee_content = config.extra.marquee_about %}
         {% else %}
