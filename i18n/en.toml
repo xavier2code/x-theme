@@ -28,6 +28,35 @@ cta_title = "Stay in the loop."
 cta_subtitle = "NEW POSTS EVERY WEEK"
 view_all_posts = "VIEW ALL POSTS"
 
+[about]
+stack_skills = "Stack & Skills"
+timeline = "Timeline"
+find_me = "Find Me"
+want_to_collaborate = "Want to collaborate?"
+get_in_touch = "GET IN TOUCH →"
+open_to_projects = "OPEN TO FREELANCE, OSS & INTERESTING PROJECTS"
+who_is_this = "WHO IS THIS PERSON"
+full_stack_dev = "FULL-STACK DEVELOPER"
+location = "WUHAN, CHINA"
+read = "READ →"
+more_about = "MORE ABOUT →"
+view_all = "VIEW ALL POSTS →"
+min_read = "min read"
+uncategorized = "Uncategorized"
+
+[filter]
+all = "All Posts"
+ai = "AI"
+terminal = "Terminal"
+zola = "Zola"
+tools = "Tools"
+
+[footer]
+built_with = "Built with Zola"
+
+[homepage]
+design_style = "Design"
+
 [list]
 archive_label = "ARCHIVE — ALL POSTS"
 every_word = "Every<br>Word."
