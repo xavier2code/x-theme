@@ -62,12 +62,53 @@ zola check
 │   └── ...
 ├── sass/                 # Sass stylesheets
 │   ├── main.scss          # Entry point
-│   ├── _variables.scss    # Design tokens
-│   ├── _base.scss         # Reset, typography
-│   ├── _components.scss   # UI components
+│   ├── _variables.scss    # Design tokens, colors, typography
+│   ├── _base.scss         # Reset, typography, body
+│   ├── _components.scss   # Navigation, cards, buttons, search
+│   ├── _layout.scss       # Page layouts
+│   ├── _content.scss      # Gallery, portfolio, features, stats
+│   ├── _interactive.scss # Accordion, tabs, modal, tooltip
+│   ├── _enhanced.scss     # Columns, blockquote, alerts
 │   └── ...
-└── zola.toml              # Theme configuration
+├── static/js/            # JavaScript modules
+│   ├── search.js         # Search functionality
+│   ├── accordion.js       # Accordion component
+│   ├── tabs.js           # Tab component
+│   ├── modal.js          # Modal component
+│   └── tooltip.js        # Tooltip component
+└── theme.toml            # Theme configuration
 ```
+
+## Components
+
+### Content Display
+- **Gallery** - `.gallery`, `.gallery-item`, `.gallery-overlay`
+- **Portfolio Grid** - `.portfolio-grid`, `.portfolio-item`
+- **Feature List** - `.feature-list`, `.feature-item`
+- **Stats** - `.stats`, `.stat-item`
+
+### Interactive
+- **Accordion** - `.accordion`, `.accordion-item` (JS: `accordion.js`)
+- **Tabs** - `.tabs`, `.tab-btn`, `.tab-panel` (JS: `tabs.js`)
+- **Modal** - `.modal`, `.modal-overlay` (JS: `modal.js`)
+- **Tooltip** - `.tooltip`, `.tooltip-text` (JS: `tooltip.js`)
+
+### Layout Enhancement
+- **Columns** - `.columns-2`, `.columns-3`, `.columns-4`
+- **Blockquote** - `.blockquote`, `.blockquote--accent`, `.blockquote--purple`, `.blockquote--emerald`
+- **Alerts** - `.alert`, `.alert--info`, `.alert--success`, `.alert--warning`, `.alert--error`
+- **Code Block** - `.code-block`, `.code-copy-btn`
+
+## Color Palette
+
+| Variable | Color | Usage |
+|----------|-------|-------|
+| `$primary-color` | `#2563eb` | Royal Blue |
+| `$accent-color` | `#ff6b35` | Warm Orange |
+| `$purple` | `#8b5cf6` | Electric Purple |
+| `$emerald` | `#10b981` | Emerald Green |
+| `$rose` | `#f43f5e` | Rose Pink |
+| `$bg-color` | `#f5f0e6` | Cream Paper |
 
 ## Configuration
 
