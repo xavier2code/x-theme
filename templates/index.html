@@ -7,7 +7,7 @@
 <header class="masthead">
     <div class="masthead__label">{{ trans(key="masthead_label", lang=lang) }} × {{ now() | date(format="%Y") }}</div>
     <h1 class="masthead__title">
-        {{ config.title | split(pat=" ") | first }}<br><em>2</em>code
+        {{ config.title | split(pat=" ") | first }}<br><em>{{ config.extra.author_nickname | default(value="xavier2code") }}</em>
     </h1>
     <p class="masthead__sub">// {{ config.extra.author_subtitle | default(value="FULL-STACK DEVELOPER · LOCATION") }}</p>
 </header>
