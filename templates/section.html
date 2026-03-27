@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% set posts_section = get_section(path="posts/_index.md") %}
+{% set posts_section = get_section(path=config.extra.posts_section | default(value="posts") ~ "/_index.md") %}
 {% set archive_posts_count = config.extra.archive_posts_count | default(value=4) %}
 {% set display_posts = posts_section.pages | sort(attribute="date") | reverse | slice(end=archive_posts_count) %}
 
 <div class="archive-header">
-    <div class="archive-header__label">// {{ trans(key="archive_label", lang=lang) }}</div>
-    <h1 class="archive-header__title">{{ trans(key="every_word", lang=lang) }}</h1>
-    <p class="archive-header__sub">{{ posts_section.pages | length }} {{ trans(key="posts", lang=lang) | upper }} · {{ now() | date(format="%Y") }}</p>
+    <div class="archive-header__label">// ARCHIVE</div>
+    <h1 class="archive-header__title">EVERYTHING</h1>
+    <p class="archive-header__sub">{{ posts_section.pages | length }} POSTS · {{ now() | date(format="%Y") }}</p>
 </div>
 
 <div class="filter-bar">
-    <button class="filter-btn active" data-filter="all">{{ trans(key="all_posts", lang=lang) }}</button>
+    <button class="filter-btn active" data-filter="all">All Posts</button>
     {% set all_categories = [] %}
     {% for page in posts_section.pages %}
         {% if page.taxonomies.categories %}
@@ -30,17 +30,17 @@
     <div class="month-divider reveal"><span class="month-divider__label">{{ now() | date(format="%B %Y") }}</span></div>
 
     <div class="posts-count reveal">
-        {{ trans(key="showing_posts", lang=lang) }} <strong>{{ display_posts | length }}</strong> {{ trans(key="of_posts", lang=lang) | upper }} {{ posts_section.pages | length }} {{ trans(key="posts", lang=lang) | upper }}
+        Showing <strong>{{ display_posts | length }}</strong> of {{ posts_section.pages | length }} POSTS
     </div>
 
     {% for page in display_posts %}
-    <div class="post-item reveal" data-category="{% if page.taxonomies.categories %}{{ page.taxonomies.categories[0] }}{% else %}{{ trans(key="uncategorized", lang=lang) }}{% endif %}">
+    <div class="post-item reveal" data-category="{% if page.taxonomies.categories %}{{ page.taxonomies.categories[0] }}{% else %}Uncategorized{% endif %}">
         <span class="post-item__num">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
         <div>
             <a href="{{ page.permalink }}" class="post-item__title">{{ page.title }}</a>
             <div class="post-item__meta">{{ page.date | date(format="%Y-%m-%d") }}</div>
         </div>
-        <div class="post-item__meta">{% if page.extra.read_time %}{{ page.extra.read_time }} {{ trans(key="min_read", lang=lang) }}{% endif %}</div>
+        <div class="post-item__meta">{% if page.extra.read_time %}{{ page.extra.read_time }} min read{% endif %}</div>
         {% if page.taxonomies.categories %}
         <span class="post-item__tag">{{ page.taxonomies.categories[0] }}</span>
         {% endif %}
@@ -48,18 +48,5 @@
     {% endfor %}
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const filter = btn.dataset.filter;
-            document.querySelectorAll('.post-item').forEach(item => {
-                item.style.display = (filter === 'all' || item.dataset.category === filter) ? '' : 'none';
-            });
-        });
-    });
-});
-</script>
+<script src="{{ get_url(path="js/filter.js") }}"></script>
 {% endblock %}

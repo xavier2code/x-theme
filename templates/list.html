@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% set min_read_label = trans(key="min_read", lang=lang) %}
-{% set uncategorized_label = trans(key="uncategorized", lang=lang) %}
+{% set min_read_label = "min read" %}
 <div class="archive-header">
-    <div class="archive-header__label">// {{ trans(key="archive_label", lang=lang) }}</div>
-    <h1 class="archive-header__title">{{ trans(key="every_word", lang=lang) }}</h1>
-    <p class="archive-header__sub">{{ section.pages | length }} {{ trans(key="posts", lang=lang) }} · {{ now() | date(format="%Y") }}</p>
+    <div class="archive-header__label">// ARCHIVE</div>
+    <h1 class="archive-header__title">EVERYTHING</h1>
+    <p class="archive-header__sub">{{ section.pages | length }} POSTS · {{ now() | date(format="%Y") }}</p>
 </div>
 
 <div class="filter-bar">
-    <button class="filter-btn active" data-filter="all">{{ trans(key="all_posts", lang=lang) }}</button>
+    <button class="filter-btn active" data-filter="all">All Posts</button>
     {% set all_categories = [] %}
     {% for page in section.pages %}
         {% if page.taxonomies.categories %}
@@ -29,7 +28,7 @@
     {% set sorted_pages = section.pages | sort(attribute="date") | reverse %}
     {% set current_month_pages = [] %}
     {% set earlier_pages = [] %}
-    
+
     {% for page in sorted_pages %}
         {% if page.date | date(format="%Y-%m") == current_month %}
             {% set_global current_month_pages = current_month_pages | concat(with=[page]) %}
@@ -37,14 +36,14 @@
             {% set_global earlier_pages = earlier_pages | concat(with=[page]) %}
         {% endif %}
     {% endfor %}
-    
+
     {% if current_month_pages %}
     <div class="month-divider reveal"><span class="month-divider__label">{{ now() | date(format="%B %Y") }}</span></div>
     <div class="posts-count reveal">
-        {{ trans(key="showing_posts", lang=lang) }} <strong>{{ current_month_pages | length }}</strong> {{ trans(key="posts_in_month", lang=lang) | upper }} {{ now() | date(format="%B %Y") | upper }}
+        Showing <strong>{{ current_month_pages | length }}</strong> POSTS IN {{ now() | date(format="%B %Y") | upper }}
     </div>
     {% for page in current_month_pages %}
-    <div class="post-item reveal" data-category="{% if page.taxonomies.categories %}{{ page.taxonomies.categories[0] }}{% else %}{{ uncategorized_label }}{% endif %}">
+    <div class="post-item reveal" data-category="{% if page.taxonomies.categories %}{{ page.taxonomies.categories[0] }}{% else %}Uncategorized{% endif %}">
         <span class="post-item__num">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
         <div>
             <div class="post-item__title">{{ page.title }}</div>
@@ -57,13 +56,13 @@
     </div>
     {% endfor %}
     {% endif %}
-    
+
     {% if earlier_pages %}
-    <div class="month-divider reveal"><span class="month-divider__label">{{ trans(key="earlier", lang=lang) }}</span></div>
+    <div class="month-divider reveal"><span class="month-divider__label">EARLIER</span></div>
     {% set earlier_start_index = current_month_pages | length %}
     {% for page in earlier_pages %}
     {% set item_index = earlier_start_index + loop.index %}
-    <div class="post-item reveal" data-category="{% if page.taxonomies.categories %}{{ page.taxonomies.categories[0] }}{% else %}{{ uncategorized_label }}{% endif %}">
+    <div class="post-item reveal" data-category="{% if page.taxonomies.categories %}{{ page.taxonomies.categories[0] }}{% else %}Uncategorized{% endif %}">
         <span class="post-item__num">{{ item_index }}</span>
         <div>
             <div class="post-item__title">{{ page.title }}</div>
@@ -78,18 +77,5 @@
     {% endif %}
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const filter = btn.dataset.filter;
-            document.querySelectorAll('.post-item').forEach(item => {
-                item.style.display = (filter === 'all' || item.dataset.category === filter) ? '' : 'none';
-            });
-        });
-    });
-});
-</script>
+<script src="{{ get_url(path="js/filter.js") }}"></script>
 {% endblock %}

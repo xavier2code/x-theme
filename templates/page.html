@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% set min_read_label = trans(key="min_read", lang=lang) %}
+{% set min_read_label = "min read" %}
 
-{% if page.path is containing("about") %}
+{% if page.template == "about" %}
 <!-- ABOUT HERO -->
 <div class="section-wrap">
     <div class="about-hero reveal">
@@ -12,13 +12,13 @@
             <div class="about-hero__img-stamp">{{ config.extra.about_est | default(value="EST. 2024") }}</div>
         </div>
         <div>
-            <div class="about-hero__label">// {{ trans(key="who_is_this", lang=lang) }}</div>
+            <div class="about-hero__label">// Who is this?</div>
             <h1 class="about-hero__name">{{ config.extra.about_name | default(value="Xavier") }}<br><em>{{ config.extra.about_nickname | default(value="2") }}code</em></h1>
             <p class="about-hero__role">{{ config.extra.about_role | default(value="FULL-STACK DEVELOPER · LOCATION") }}</p>
             <div class="about-hero__bio">
-                <p>{{ trans(key="about_bio_1", lang=lang) | safe }}</p>
-                <p>{{ trans(key="about_bio_2", lang=lang) | safe }}</p>
-                <p>{{ trans(key="about_bio_3", lang=lang) | safe }}</p>
+                <p>{{ config.extra.about_bio_1 | default(value="") }}</p>
+                <p>{{ config.extra.about_bio_2 | default(value="") }}</p>
+                <p>{{ config.extra.about_bio_3 | default(value="") }}</p>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
 <!-- SKILLS -->
 <div class="section-wrap reveal">
     <div class="section-num">01</div>
-    <h2 class="section-title">{{ trans(key="stack_skills", lang=lang) }}</h2>
+    <h2 class="section-title">STACK & SKILLS</h2>
     <div class="section-rule"></div>
     <div class="skills-grid">
         {% for skill in config.extra.skills | default(value=[]) %}
@@ -43,7 +43,7 @@
 <!-- TIMELINE -->
 <div class="section-wrap reveal">
     <div class="section-num">02</div>
-    <h2 class="section-title">{{ trans(key="timeline", lang=lang) }}</h2>
+    <h2 class="section-title">TIMELINE</h2>
     <div class="section-rule"></div>
     <div class="timeline">
         {% for item in config.extra.timeline | default(value=[]) %}
@@ -59,7 +59,7 @@
 <!-- LINKS -->
 <div class="section-wrap reveal">
     <div class="section-num">03</div>
-    <h2 class="section-title">{{ trans(key="find_me", lang=lang) }}</h2>
+    <h2 class="section-title">FIND ME</h2>
     <div class="section-rule"></div>
     <div class="links-grid">
         {% if config.extra.github_url %}
@@ -94,9 +94,9 @@
 
 <!-- CTA -->
 <div class="cta-strip">
-    <h2>{{ trans(key="want_to_collaborate", lang=lang) }}</h2>
-    <p>// {{ trans(key="open_to_projects", lang=lang) }}</p>
-    <a href="mailto:{{ config.extra.email | default(value="hello@example.com") }}" class="btn-system">{{ trans(key="get_in_touch", lang=lang) }}</a>
+    <h2>{{ config.extra.about_want_collaborate | default(value="Want to collaborate?") }}</h2>
+    <p>// {{ config.extra.about_open_to | default(value="OPEN TO FREELANCE, OSS & INTERESTING PROJECTS") }}</p>
+    <a href="mailto:{{ config.extra.email | default(value="hello@example.com") }}" class="btn-system">Get in Touch</a>
 </div>
 
 {% else %}
@@ -145,13 +145,13 @@
     {% endif %}
 </div>
 
-<!-- RELATED -->
-{% set related_posts = get_section(path="posts/_index.md") %}
-{% if related_posts.pages | length > 1 %}
+<!-- RECENT POSTS -->
+{% set posts_section = get_section(path=config.extra.posts_section | default(value="posts") ~ "/_index.md") %}
+{% if posts_section.pages | length > 1 %}
 <div class="related-section">
-    <h2 class="related-section__title">{{ trans(key="more_posts", lang=lang) }}</h2>
+    <h2 class="related-section__title">MORE POSTS</h2>
     <div class="related-grid">
-        {% for page in related_posts.pages | slice(end=3) %}
+        {% for page in posts_section.pages | slice(end=3) %}
         <a href="{{ page.permalink }}" class="related-card">
             {% if page.taxonomies.categories %}
             <span class="related-card__tag">{{ page.taxonomies.categories[0] }}</span>

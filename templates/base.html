@@ -70,29 +70,17 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const reveals = document.querySelectorAll('.reveal');
+        let visibleCount = 0;
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, i) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    setTimeout(() => entry.target.classList.add('visible'), i * 80);
+                    setTimeout(() => entry.target.classList.add('visible'), visibleCount * 50);
+                    visibleCount++;
                     observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.08 });
         reveals.forEach(el => observer.observe(el));
-
-        if (window.__MARQUEE_DATA__ && window.__MARQUEE_DATA__.length > 0) {
-            var marqueeTrack = document.querySelector('.marquee-track');
-            if (marqueeTrack) {
-                var html = '<span>×</span>';
-                window.__MARQUEE_DATA__.forEach(function(item) {
-                    html += item.title + ' · ' + item.date + ' <span>×</span>';
-                });
-                window.__MARQUEE_DATA__.forEach(function(item) {
-                    html += item.title + ' · ' + item.date + ' <span>×</span>';
-                });
-                marqueeTrack.innerHTML = html;
-            }
-        }
     });
     </script>
 </body>

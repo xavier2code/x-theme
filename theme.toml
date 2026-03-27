@@ -61,7 +61,6 @@ min_version = "0.22"
 # github_url = "https://github.com/yourname"
 
 # ============================================
-# Language Switcher (i18n)
+# Posts Section
 # ============================================
-# lang_switcher_enabled = true   # Enable language switcher in nav
-# lang_switcher_position = "nav-right"  # Options: nav-right, nav-left, footer
+# posts_section = "posts"  # Default section for blog posts
