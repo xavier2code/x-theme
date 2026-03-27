@@ -561,3 +561,170 @@
         margin-left: auto;
     }
 }
+
+// Archive List Styles (shared between list.html and section.html)
+.archive-header {
+    padding: 3rem 2rem 2rem;
+    border-bottom: 4px solid $border-color;
+}
+
+.archive-header__label {
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: $accent-color;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.archive-header__title {
+    font-family: $font-heading;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    line-height: 0.9;
+    color: $primary-color;
+}
+
+.archive-header__sub {
+    font-family: $font-mono;
+    font-size: 0.78rem;
+    color: $grey;
+    margin-top: 0.8rem;
+    letter-spacing: 0.06em;
+}
+
+.filter-bar {
+    display: flex;
+    gap: 0;
+    border-bottom: $border;
+    background: $bg-color;
+    overflow-x: auto;
+}
+
+.filter-btn {
+    font-family: $font-mono;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.4rem;
+    border: none;
+    border-right: 2px solid $border-color;
+    background: transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+    
+    &:hover, &.active {
+        background: $accent-color;
+        color: #fff;
+    }
+}
+
+.posts-count {
+    font-family: $font-mono;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: $grey;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid $border-color;
+    padding-bottom: 1rem;
+    
+    strong {
+        color: $primary-color;
+    }
+}
+
+.post-item {
+    display: grid;
+    grid-template-columns: 80px 1fr 160px auto;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 1.5rem 0;
+    border-bottom: 2px solid rgba(26, 26, 26, 0.12);
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+    
+    &:hover {
+        background: rgba(26, 26, 26, 0.03);
+        transform: translateX(4px);
+    }
+    
+    &:hover .post-item__title {
+        color: $accent-color;
+    }
+}
+
+.post-item__num {
+    font-family: $font-mono;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: rgba(26, 26, 26, 0.1);
+    line-height: 1;
+}
+
+.post-item__title {
+    font-family: $font-heading;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.3;
+    transition: color 0.15s;
+}
+
+.post-item__meta {
+    font-family: $font-mono;
+    font-size: 0.68rem;
+    color: $grey;
+    letter-spacing: 0.08em;
+}
+
+.post-item__tag {
+    font-family: $font-mono;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    background: $primary-color;
+    padding: 0.2rem 0.5rem;
+    white-space: nowrap;
+}
+
+.month-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2.5rem 0 1.5rem;
+    
+    &::before, &::after {
+        content: '';
+        flex: 1;
+        height: 3px;
+        background: $border-color;
+    }
+}
+
+.month-divider__label {
+    font-family: $font-mono;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $grey;
+    background: $bg-color;
+    padding: 0 0.5rem;
+}
+
+@media (max-width: 700px) {
+    .post-item {
+        grid-template-columns: 50px 1fr;
+        grid-template-rows: auto auto;
+    }
+    .post-item__meta {
+        grid-column: 2;
+    }
+    .post-item__tag {
+        grid-column: 2;
+        margin-top: 0.5rem;
+    }
+    .archive-header__title {
+        font-size: 3rem;
+    }
+}
