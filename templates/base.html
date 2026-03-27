@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ lang }}">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,34 +14,13 @@
 <body>
     <nav class="topnav">
         <a href="{{ get_url(path="/") }}" class="topnav__brand {% if current_path == "/" %}active{% endif %}">× {{ config.extra.brand | default(value=config.title) }}</a>
-        <a href="{{ get_url(path="/") }}" class="{% if current_path == "/" %}active{% endif %}">{{ trans(key="nav_home", lang=lang) }}</a>
-        <a href="{{ get_url(path="about") }}" class="{% if current_path == "/about" %}active{% endif %}">{{ trans(key="nav_about", lang=lang) }}</a>
-        <a href="{{ get_url(path="archives") }}" class="{% if current_path is starting_with("/archives") %}active{% endif %}">{{ trans(key="nav_archive", lang=lang) }}</a>
+        <a href="{{ get_url(path="/") }}" class="{% if current_path == "/" %}active{% endif %}">首页</a>
+        <a href="{{ get_url(path="about") }}" class="{% if current_path == "/about" %}active{% endif %}">关于</a>
+        <a href="{{ get_url(path="archives") }}" class="{% if current_path is starting_with("/archives") %}active{% endif %}">归档</a>
         <div class="search-container">
             <input type="text" class="search-input" placeholder="搜索文章..." />
             <div class="search-results"></div>
         </div>
-        {% if config.extra.lang_switcher_enabled | default(value=false) %}
-        <div class="lang-switcher">
-            {% if lang == "zh" %}
-            {% set path_without_lang = current_path | trim_start_matches(pat="/") %}
-            {% if path_without_lang | length > 0 %}
-            <a href="{{ get_url(path=path_without_lang, lang="en") }}" aria-label="{{ trans(key="switch_lang_label", lang="en") }}">{{ trans(key="switch_to_en", lang="en") }}</a>
-            {% else %}
-            <a href="{{ get_url(path="/", lang="en") }}" aria-label="{{ trans(key="switch_lang_label", lang="en") }}">{{ trans(key="switch_to_en", lang="en") }}</a>
-            {% endif %}
-            {% else %}
-            {% if current_path is starting_with("/en/") %}
-            {% set content_path = current_path | trim_start_matches(pat="/en/") %}
-            <a href="{{ get_url(path=content_path, lang="zh") }}" aria-label="{{ trans(key="switch_lang_label", lang="zh") }}">{{ trans(key="switch_to_zh", lang="zh") }}</a>
-            {% elif current_path == "/en" %}
-            <a href="{{ get_url(path="/", lang="zh") }}" aria-label="{{ trans(key="switch_lang_label", lang="zh") }}">{{ trans(key="switch_to_zh", lang="zh") }}</a>
-            {% else %}
-            <a href="{{ get_url(path="/", lang="zh") }}" aria-label="{{ trans(key="switch_lang_label", lang="zh") }}">{{ trans(key="switch_to_zh", lang="zh") }}</a>
-            {% endif %}
-            {% endif %}
-        </div>
-        {% endif %}
     </nav>
 
     {% block marquee %}
@@ -74,11 +53,11 @@
 
     <footer class="footer">
         <div class="footer-inner">
-            <span>© {{ now() | date(format="%Y") }} {{ config.title }} · {{ trans(key="built_with", lang=lang) }}</span>
+            <span>© {{ now() | date(format="%Y") }} {{ config.title }} · 由 Zola 构建</span>
             <div class="footer-links">
-                <a href="{{ get_url(path="/") }}">{{ trans(key="nav_home", lang=lang) }}</a>
-                <a href="{{ get_url(path="about") }}">{{ trans(key="nav_about", lang=lang) }}</a>
-                <a href="{{ get_url(path="archives") }}">{{ trans(key="nav_archive", lang=lang) }}</a>
+                <a href="{{ get_url(path="/") }}">首页</a>
+                <a href="{{ get_url(path="about") }}">关于</a>
+                <a href="{{ get_url(path="archives") }}">归档</a>
                 {% if config.extra.github_url %}
                 <a href="{{ config.extra.github_url }}" target="_blank" rel="noopener">GitHub</a>
                 {% endif %}
@@ -86,7 +65,8 @@
         </div>
     </footer>
 
-    <script src="https://unpkg.com/elasticlunr@0.9.5/dist/elasticlunr.min.js"></script>
+    <script src="https://unpkg.com/segment@0.1.9/dist/segment.min.js"></script>
+    <script src="https://unpkg.com/flexsearch@0.7.43/dist/flexsearch.min.js"></script>
     <script src="{{ get_url(path="js/search.js") }}"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {

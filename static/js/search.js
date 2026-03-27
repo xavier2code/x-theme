@@ -31,20 +31,35 @@
         }
     }
 
+    function tokenizeChinese(text) {
+        if (!text) return '';
+        if (typeof Segment === 'undefined') {
+            return text;
+        }
+        const segments = Segment.prototype.doSegment(text, { simple: true });
+        return segments.join(' ');
+    }
+
     function buildIndex(store) {
-        const index = elasticlunr(function() {
-            this.addField('title');
-            this.addField('description');
-            this.addField('content');
-            this.setRef('id');
+        const index = new FlexSearch.Document({
+            document: {
+                id: 'id',
+                index: ['title', 'description', 'content'],
+                store: ['title', 'description', 'content', 'url']
+            },
+            tokenize: 'forward',
+            cache: true
         });
 
         store.forEach(function(doc) {
-            index.addDoc({
+            index.add({
                 id: doc.id || doc.url,
-                title: doc.title || '',
-                description: doc.description || '',
-                content: doc.content || ''
+                title: tokenizeChinese(doc.title || ''),
+                description: tokenizeChinese(doc.description || ''),
+                content: tokenizeChinese(doc.content || ''),
+                url: doc.url || doc.id,
+                _originalTitle: doc.title || '',
+                _originalDescription: doc.description || ''
             });
         });
 
@@ -85,37 +100,43 @@
             return;
         }
 
-        let results;
+        let results = [];
         try {
-            results = searchIndex.search(query, {
-                fields: {
-                    title: { boost: 2 },
-                    description: { boost: 1 },
-                    content: { boost: 0.5 }
-                },
-                expand: true
+            const tokenizedQuery = tokenizeChinese(query);
+            results = searchIndex.search(tokenizedQuery, {
+                limit: 8,
+                enrich: true
             });
         } catch (e) {
             console.warn('Search error:', e);
-            results = [];
         }
 
-        if (results.length === 0) {
+        const seen = new Set();
+        const uniqueResults = [];
+        results.forEach(function(fieldResult) {
+            if (fieldResult.result) {
+                fieldResult.result.forEach(function(item) {
+                    if (!seen.has(item.id)) {
+                        seen.add(item.id);
+                        uniqueResults.push(item);
+                    }
+                });
+            }
+        });
+
+        if (uniqueResults.length === 0) {
             resultsDropdown.innerHTML = '<div class="search-no-results">No results found</div>';
             resultsDropdown.classList.add('show');
             return;
         }
 
-        const storeMap = {};
-        searchStore.forEach(function(doc) {
-            storeMap[doc.id || doc.url] = doc;
-        });
-
-        resultsDropdown.innerHTML = results.slice(0, 8).map(function(result) {
-            const doc = storeMap[result.ref] || {};
-            return '<a href="' + escapeHtml(doc.url || result.ref) + '" class="search-result">' +
-                '<div class="search-result-title">' + escapeHtml(doc.title || '') + '</div>' +
-                (doc.description ? '<div class="search-result-excerpt">' + escapeHtml(getExcerpt(doc.description, query)) + '</div>' : '') +
+        resultsDropdown.innerHTML = uniqueResults.slice(0, 8).map(function(result) {
+            const doc = result.doc || {};
+            const title = doc._originalTitle || doc.title || '';
+            const description = doc._originalDescription || doc.description || '';
+            return '<a href="' + escapeHtml(doc.url || result.id) + '" class="search-result">' +
+                '<div class="search-result-title">' + escapeHtml(title) + '</div>' +
+                (description ? '<div class="search-result-excerpt">' + escapeHtml(getExcerpt(description, query)) + '</div>' : '') +
                 '</a>';
         }).join('');
         resultsDropdown.classList.add('show');
