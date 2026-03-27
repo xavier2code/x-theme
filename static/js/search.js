@@ -47,7 +47,7 @@
                 index: ['title', 'description', 'content'],
                 store: ['title', 'description', 'content', 'url']
             },
-            tokenize: 'forward',
+            tokenize: 'full',
             cache: true
         });
 
