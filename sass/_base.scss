@@ -68,3 +68,16 @@ img {
         transform: translateY(0);
     }
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+:focus-visible {
+    outline: 3px solid $accent-color;
+    outline-offset: 2px;
+}

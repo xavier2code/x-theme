@@ -1,44 +1,5 @@
 {% extends "base.html" %}
 
-{% block marquee %}
-{% if config.extra.marquee_home %}
-<script>
-window.__MARQUEE_DATA__ = [];
-</script>
-<div class="marquee-wrap">
-    <div class="marquee-track">
-        <span>×</span>
-        {{ config.extra.marquee_home }}
-        <span>×</span>
-        {{ config.extra.marquee_home }}
-        <span>×</span>
-    </div>
-</div>
-{% else %}
-{% set hero_post = get_section(path="posts/_index.md") %}
-<script>
-window.__MARQUEE_DATA__ = [
-    {% if hero_post and hero_post.pages %}
-    {% for page in hero_post.pages | slice(end=5) %}
-    {title: "{{ page.title | safe }}", date: "{{ page.date | date(format="%Y-%m-%d") }}"},
-    {% endfor %}
-    {% endif %}
-];
-</script>
-{% if config.extra.marquee_text %}
-<div class="marquee-wrap">
-    <div class="marquee-track">
-        <span>×</span>
-        {{ config.extra.marquee_text }}
-        <span>×</span>
-        {{ config.extra.marquee_text }}
-        <span>×</span>
-    </div>
-</div>
-{% endif %}
-{% endif %}
-{% endblock %}
-
 {% block content %}
 {% set hero_post = get_section(path="posts/_index.md") %}
 
@@ -116,8 +77,8 @@ window.__MARQUEE_DATA__ = [
         <div class="about-right">
             <img src="{{ get_url(path="avatar.jpg") }}" alt="Avatar" class="about-avatar" loading="lazy">
             <p class="about-bio">
-            {{ trans(key="author_bio", lang=lang) }}
-        </p>
+                {{ trans(key="author_bio", lang=lang) }}
+            </p>
             <a href="{{ get_url(path="about") }}" class="post-card__link">{{ trans(key="more_about", lang=lang) }}</a>
         </div>
     </div>
@@ -148,24 +109,8 @@ window.__MARQUEE_DATA__ = [
 <div class="cta-strip reveal">
     <h2>{{ trans(key="cta_title", lang=lang) }}</h2>
     <p>// {{ trans(key="cta_subtitle", lang=lang) }}</p>
-    <a href="{{ get_url(path="archives") }}" class="btn-system">{{ trans(key="view_all_posts", lang=lang) }} →</a>
+    <a href="{{ get_url(path="archives") }}" class="btn-system">{{ trans(key="view_all_posts", lang=lang) }}</a>
 </div>
 
 {% endif %}
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.post-card').forEach(function(card) {
-        card.addEventListener('click', function(e) {
-            if (e.target.tagName !== 'A') {
-                var link = card.querySelector('.post-card__link');
-                if (link) {
-                    window.location.href = link.href;
-                }
-            }
-        });
-    });
-
-});
-</script>
 {% endblock %}

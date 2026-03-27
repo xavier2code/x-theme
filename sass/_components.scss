@@ -160,7 +160,7 @@
     padding: 1.2rem;
     position: relative;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 5px 5px 0 rgba(26, 26, 26, 0.18);
+    box-shadow: $shadow-xs;
     cursor: pointer;
     
     &:hover {
@@ -341,7 +341,7 @@
     overflow: hidden;
     
     &::before {
-        content: 'EST. 2026';
+        content: 'EST. var(--year, 2026)';
         position: absolute;
         right: 2rem;
         top: 1.2rem;
@@ -439,7 +439,7 @@
     display: block;
     margin-bottom: 1.2rem;
     filter: sepia(10%);
-    box-shadow: 5px 5px 0 rgba(26, 26, 26, 0.18);
+    box-shadow: $shadow-xs;
 }
 
 // About Page Styles
@@ -878,7 +878,7 @@
     
     &:hover { 
         transform: translateY(-3px); 
-        box-shadow: 5px 5px 0 $border-color; 
+        box-shadow: $shadow-xs; 
     }
 }
 
@@ -980,7 +980,7 @@
     padding: 0.9rem 2.2rem;
     text-decoration: none;
     position: relative;
-    box-shadow: 5px 5px 0 $border-color;
+    box-shadow: $shadow-xs;
     transition: transform 0.15s, box-shadow 0.15s;
     
     &:hover {
